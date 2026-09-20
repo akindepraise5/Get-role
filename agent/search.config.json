@@ -1,0 +1,73 @@
+{
+  "_readme": "EDIT THE `profile` OF EACH SEARCH FIRST — it is the text the model scores every posting against. Each entry in `searches` is an independent track with its own profile and keywords; they share one network pass, so adding a track costs no extra fetching. Copy a block to add your own.",
+
+  "searches": [
+    {
+      "name": "Product design internships",
+      "profile": "Student or recent graduate looking for a product design internship. Works in Figma, can run a design process end to end — research, wireframes, prototypes, handoff — and has a portfolio with two or three case studies. Open to remote internships worldwide or on-site in my own city. No visa sponsorship, so an internship requiring relocation abroad is a poor fit unless the posting says it sponsors. Not a graphic design, motion or brand-only role — this is product/UX work on digital products.",
+      "keywords": [
+        "product design", "product designer", "ux design", "ux designer", "ui design", "ui designer",
+        "ux/ui", "ui/ux", "user experience", "interaction design", "design intern", "design internship"
+      ],
+      "excludeKeywords": [
+        "senior", "staff", "principal", "lead ", "head of", "director", "manager", "vp ",
+        "5+ years", "6+ years", "7+ years", "8+ years", "10+ years", "clearance",
+        "graphic design", "motion design", "brand design", "brand designer"
+      ],
+      "mustMatchAll": ["intern"],
+      "searchBody": false,
+      "maxDaysOld": 7,
+      "minMatchScore": 55,
+      "maxResults": 20
+    },
+    {
+      "name": "Product design roles",
+      "profile": "Early-career product designer looking for a first or second full-time role — junior, associate, mid-level or an entry-level design position. Strong in Figma, design systems, prototyping and usability testing; comfortable working with engineers. Open to remote worldwide or on-site in my own city. No visa sponsorship available. Not looking for senior, lead or management positions, and not graphic/brand/marketing design.",
+      "keywords": [
+        "product design", "product designer", "ux design", "ux designer", "ui design", "ui designer",
+        "ux/ui", "ui/ux", "user experience", "interaction design", "design systems", "experience designer"
+      ],
+      "excludeKeywords": [
+        "senior", "staff", "principal", "lead ", "head of", "director", "manager", "vp ",
+        "5+ years", "6+ years", "7+ years", "8+ years", "10+ years", "clearance",
+        "graphic design", "motion design", "brand design"
+      ],
+      "searchBody": false,
+      "maxYearsExperience": 4,
+      "maxDaysOld": 2,
+      "minMatchScore": 60,
+      "maxResults": 25
+    }
+  ],
+
+  "defaults": {
+    "remoteOnly": false,
+    "maxDaysOld": 2,
+    "minMatchScore": 60,
+    "maxResults": 25
+  },
+
+  "sources": {
+    "remotive": true,
+    "remoteok": true,
+    "arbeitnow": true,
+    "jobicy": { "enabled": true, "tags": ["design", "ux", "ui"] },
+    "hackernews": true,
+
+    "adzuna": { "enabled": false, "country": "gb", "what": "junior product designer" },
+    "jsearch": { "enabled": false, "queries": ["product design intern", "junior product designer remote"] },
+
+    "_companies_help": "The slug is the last part of the company's job-board URL: boards.greenhouse.io/SLUG, jobs.lever.co/SLUG, jobs.ashbyhq.com/SLUG. Every slug below is verified working and posts design roles. A company that hosts its own careers page has no public API and cannot be added.",
+    "companies": {
+      "greenhouse": ["figma", "databricks", "pinterest", "duolingo", "asana", "coinbase", "airtable", "gitlab", "monzo", "wise", "cloudflare"],
+      "lever": ["palantir", "spotify"],
+      "ashby": ["linear", "vanta", "ramp", "notion", "replit", "cursor", "openai"]
+    }
+  },
+
+  "llm": {
+    "provider": "auto",
+    "model": "",
+    "batchSize": 15
+  }
+}

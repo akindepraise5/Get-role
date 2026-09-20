@@ -1,0 +1,1211 @@
+<title>Get@role</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=IBM+Plex+Mono:wght@400;500&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+:root{
+  color-scheme: light;
+  --bg:#ECEFF0; --surface:#FFFFFF; --surface-2:#F4F7F7; --surface-3:#E4EAEB;
+  --ink:#0D1618; --ink-2:#44575C; --ink-3:#7A8C91;
+  --line:#DAE2E3; --line-2:#C5D1D3;
+  --accent:#0E5A64; --accent-2:#0A444C; --on-accent:#F1FAFB; --accent-soft:#DCEDEF;
+  --danger:#AB2E23; --danger-soft:#F8E3E1;
+  --warn:#8A5A05; --warn-soft:#FAEEDB;
+  --shadow-1:0 1px 2px rgba(13,22,24,.05);
+  --shadow-2:0 2px 4px rgba(13,22,24,.06), 0 16px 32px -20px rgba(13,22,24,.35);
+  --r-s:8px; --r-m:12px; --r-l:16px;
+
+  --st-saved:#4F6369;      --st-saved-bg:#E2E9EA;
+  --st-applied:#31469E;    --st-applied-bg:#E2E7F8;
+  --st-replied:#0B6F8C;    --st-replied-bg:#DCEEF5;
+  --st-interview:#8A5A05;  --st-interview-bg:#FAEEDB;
+  --st-offer:#0F6D44;      --st-offer-bg:#DBF0E4;
+  --st-rejected:#9B3A3A;   --st-rejected-bg:#F6E1E1;
+  --st-ghosted:#6A7176;    --st-ghosted-bg:#E8EBEB;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --bg:#0C1214; --surface:#141C1E; --surface-2:#1A2426; --surface-3:#212D30;
+    --ink:#E7EEEF; --ink-2:#9AAAAE; --ink-3:#75868A;
+    --line:#263235; --line-2:#334144;
+    --accent:#4CC2CE; --accent-2:#7FD9E2; --on-accent:#05252A; --accent-soft:#12333A;
+    --danger:#F08A80; --danger-soft:#3A1C19;
+    --warn:#E5B357; --warn-soft:#352810;
+    --shadow-1:0 1px 2px rgba(0,0,0,.4);
+    --shadow-2:0 2px 6px rgba(0,0,0,.45), 0 20px 40px -24px rgba(0,0,0,.8);
+    --st-saved:#A3B4B9;      --st-saved-bg:#1E2A2D;
+    --st-applied:#9AAAFF;    --st-applied-bg:#1B2143;
+    --st-replied:#5FC7E6;    --st-replied-bg:#0F2F3B;
+    --st-interview:#E8B65C;  --st-interview-bg:#332710;
+    --st-offer:#5AD290;      --st-offer-bg:#0E2E1F;
+    --st-rejected:#EE8E8E;   --st-rejected-bg:#341A1A;
+    --st-ghosted:#9BA5A9;    --st-ghosted-bg:#202829;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --bg:#0C1214; --surface:#141C1E; --surface-2:#1A2426; --surface-3:#212D30;
+  --ink:#E7EEEF; --ink-2:#9AAAAE; --ink-3:#75868A;
+  --line:#263235; --line-2:#334144;
+  --accent:#4CC2CE; --accent-2:#7FD9E2; --on-accent:#05252A; --accent-soft:#12333A;
+  --danger:#F08A80; --danger-soft:#3A1C19;
+  --warn:#E5B357; --warn-soft:#352810;
+  --shadow-1:0 1px 2px rgba(0,0,0,.4);
+  --shadow-2:0 2px 6px rgba(0,0,0,.45), 0 20px 40px -24px rgba(0,0,0,.8);
+  --st-saved:#A3B4B9;      --st-saved-bg:#1E2A2D;
+  --st-applied:#9AAAFF;    --st-applied-bg:#1B2143;
+  --st-replied:#5FC7E6;    --st-replied-bg:#0F2F3B;
+  --st-interview:#E8B65C;  --st-interview-bg:#332710;
+  --st-offer:#5AD290;      --st-offer-bg:#0E2E1F;
+  --st-rejected:#EE8E8E;   --st-rejected-bg:#341A1A;
+  --st-ghosted:#9BA5A9;    --st-ghosted-bg:#202829;
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:"Public Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size:15px; line-height:1.45; margin:0; -webkit-text-size-adjust:100%;
+}
+h1,h2,h3{font-family:"Bricolage Grotesque","Public Sans",system-ui,sans-serif;font-weight:700;letter-spacing:-.015em;margin:0;text-wrap:balance}
+.mono{font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-variant-numeric:tabular-nums}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+
+.topbar{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:30;
+  background:var(--bg); border-bottom:1px solid var(--line);
+}
+.topbar-in{max-width:880px;margin:0 auto;padding-inline:16px;padding-block:10px;display:flex;align-items:center;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;min-width:0;flex:1}
+.mark{flex:none;width:34px;height:34px;border-radius:10px;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:19px;line-height:1}
+.brand h1{font-size:19px;line-height:1.1}
+.sub{margin:1px 0 0;font-size:11.5px;color:var(--ink-2);letter-spacing:.01em}
+
+.btn{border:1px solid var(--line-2);background:var(--surface);color:var(--ink);border-radius:999px;padding:8px 14px;font-size:13.5px;font-weight:600;cursor:pointer;white-space:nowrap;box-shadow:var(--shadow-1);transition:transform .12s ease,background .12s ease,border-color .12s ease}
+.btn:hover{border-color:var(--accent)}
+.btn:active{transform:translateY(1px)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.btn.primary:hover{background:var(--accent-2);border-color:var(--accent-2)}
+.btn.ghost{background:transparent;box-shadow:none;border-color:var(--line-2);color:var(--ink-2);font-weight:500}
+.btn.ghost:hover{color:var(--ink)}
+.btn.danger{background:transparent;border-color:var(--danger);color:var(--danger);box-shadow:none}
+.btn[disabled]{opacity:.5;cursor:not-allowed;transform:none}
+
+.wrap{max-width:880px;margin:0 auto;padding-inline:16px;padding-block:14px 60px}
+
+.notice{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--surface-2);border:1px dashed var(--line-2);border-radius:var(--r-m);padding:10px 12px;margin-bottom:12px;font-size:13px;color:var(--ink-2)}
+.notice[hidden]{display:none!important}
+
+.rail{display:flex;gap:7px;overflow-x:auto;padding-block:2px 12px;scrollbar-width:none}
+.rail::-webkit-scrollbar{display:none}
+.stage{flex:none;display:flex;align-items:center;gap:7px;cursor:pointer;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px 6px 9px;font-size:13px;font-weight:500;color:var(--ink-2);box-shadow:var(--shadow-1)}
+.stage .dot{width:7px;height:7px;border-radius:50%;background:var(--sc,var(--ink-3));flex:none}
+.stage .n{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;font-size:12px;color:var(--ink-3)}
+.stage[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.stage[aria-pressed="true"] .n{color:var(--bg);opacity:.75}
+
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.search{flex:1 1 180px;min-width:0}
+.search input{width:100%;border:1px solid var(--line);background:var(--surface);border-radius:var(--r-m);padding:9px 12px;font-size:14px;-webkit-appearance:none;appearance:none}
+.search input::placeholder{color:var(--ink-3)}
+select.plain{border:1px solid var(--line);background:var(--surface);border-radius:var(--r-m);padding:9px 30px 9px 11px;font-size:13.5px;color:var(--ink-2);-webkit-appearance:none;appearance:none;cursor:pointer;background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%);background-position:calc(100% - 15px) 50%,calc(100% - 10px) 50%;background-size:5px 5px,5px 5px;background-repeat:no-repeat}
+
+.list{display:flex;flex-direction:column;gap:9px}
+@media (min-width:780px){ .list{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start} }
+
+.card{position:relative;display:flex;gap:11px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-m);padding:12px 12px 12px 15px;box-shadow:var(--shadow-1);overflow:hidden;cursor:pointer;transition:border-color .14s ease,transform .14s ease}
+.card:hover{border-color:var(--line-2)}
+.card:active{transform:scale(.995)}
+.card::before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:var(--sc)}
+.card-main{flex:1;min-width:0}
+.line1{display:flex;align-items:baseline;gap:8px;justify-content:space-between}
+.role{font-size:15.5px;line-height:1.25;overflow-wrap:anywhere}
+.company{margin:2px 0 0;font-size:13px;color:var(--ink-2);overflow-wrap:anywhere}
+.company b{font-weight:600;color:var(--ink)}
+.facts{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.tag{font-size:11px;letter-spacing:.02em;padding:2.5px 7px;border-radius:5px;background:var(--surface-3);color:var(--ink-2);white-space:nowrap}
+.tag.ex{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.due{font-size:11.5px;font-weight:600;white-space:nowrap;padding:2.5px 7px;border-radius:5px;background:var(--surface-3);color:var(--ink-2);flex:none}
+.due.warn{background:var(--warn-soft);color:var(--warn)}
+.due.hot{background:var(--danger-soft);color:var(--danger)}
+.due.past{background:transparent;color:var(--ink-3)}
+
+.pill{-webkit-appearance:none;appearance:none;cursor:pointer;flex:none;border:1px solid transparent;border-radius:999px;background-color:var(--sc-bg);color:var(--sc);font-size:11.5px;font-weight:600;letter-spacing:.01em;padding:5px 22px 5px 10px;max-width:128px;background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%);background-position:calc(100% - 12px) 51%,calc(100% - 8px) 51%;background-size:4px 4px,4px 4px;background-repeat:no-repeat}
+.pill:hover{border-color:var(--sc)}
+
+.empty{text-align:center;border:1px dashed var(--line-2);border-radius:var(--r-l);padding:34px 20px;background:var(--surface-2)}
+.empty[hidden]{display:none!important}
+.empty h2{font-size:19px;margin-bottom:6px}
+.empty p{color:var(--ink-2);font-size:14px;margin:0 auto 16px;max-width:38ch}
+
+/* ---------- company directory ---------- */
+.co-tools{position:sticky;top:58px;background:var(--surface);z-index:1;padding-bottom:10px;margin-bottom:4px;border-bottom:1px solid var(--line)}
+.co-rail{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-block:2px 8px}
+.co-rail::-webkit-scrollbar{display:none}
+.co-rail .stage{font-size:12.5px;padding:5px 11px}
+.co-count{font-size:11.5px;color:var(--ink-3);letter-spacing:.04em;text-transform:uppercase;font-weight:600;margin:10px 0 8px}
+.co-list{display:flex;flex-direction:column;gap:9px}
+.co{border:1px solid var(--line);border-radius:var(--r-m);padding:12px;background:var(--surface-2)}
+.co-head{display:flex;align-items:flex-start;gap:9px;justify-content:space-between}
+.co-name{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:15px;letter-spacing:-.01em;line-height:1.2}
+.co-meta{margin:2px 0 0;font-size:12px;color:var(--ink-2)}
+.co-badge{flex:none;font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px;background:var(--st-offer-bg);color:var(--st-offer);white-space:nowrap}
+.co-badge.none{background:var(--surface-3);color:var(--ink-3)}
+.co-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}
+.co-titles{margin:9px 0 0;font-size:12px;color:var(--ink-2);line-height:1.5}
+.co-titles b{color:var(--ink);font-weight:600}
+.co-links{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:11px;padding-top:10px;border-top:1px solid var(--line)}
+.co-links a{font-size:12px;font-weight:600;color:var(--accent);text-decoration:none;padding:4px 9px;border:1px solid var(--line-2);border-radius:999px;white-space:nowrap}
+.co-links a:hover{border-color:var(--accent);background:var(--accent-soft)}
+.co-links a.dim{color:var(--ink-2);font-weight:500}
+.co-links .spacer{flex:1}
+.co-links button{font-size:12px;font-weight:600;padding:4px 11px;border-radius:999px;border:1px solid var(--accent);background:var(--accent);color:var(--on-accent);cursor:pointer;white-space:nowrap}
+.co-links button:disabled{opacity:.45;cursor:default}
+.co-note{font-size:12px;color:var(--ink-3);margin:12px 0 0;line-height:1.5}
+
+.sheet{position:fixed;inset:0;z-index:60;display:flex;align-items:flex-end;justify-content:center;background:rgba(8,16,18,.55)}
+.sheet[hidden]{display:none!important}
+.panel{background:var(--surface);width:100%;max-width:580px;max-height:93vh;max-height:93dvh;overflow-y:auto;border-radius:var(--r-l) var(--r-l) 0 0;border:1px solid var(--line);border-bottom:0;box-shadow:var(--shadow-2);padding:0 16px calc(18px + env(safe-area-inset-bottom, 0px));animation:rise .22s cubic-bezier(.22,1,.36,1)}
+@keyframes rise{from{transform:translateY(22px);opacity:.4}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion: reduce){.panel{animation:none}}
+@media (min-width:640px){
+  .sheet{align-items:center;padding:20px}
+  .panel{border-radius:var(--r-l);border-bottom:1px solid var(--line);max-height:88vh;max-height:88dvh}
+}
+.panel-head{position:sticky;top:0;background:var(--surface);z-index:2;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:16px 0 12px;border-bottom:1px solid var(--line);margin-bottom:14px}
+.panel-head h2{font-size:17px}
+.x{border:0;background:var(--surface-3);color:var(--ink-2);width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:17px;line-height:1;flex:none}
+.x:hover{color:var(--ink)}
+
+.field{margin-bottom:12px}
+.field label{display:block;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-bottom:5px}
+.field input,.field select,.field textarea{width:100%;border:1px solid var(--line-2);background:var(--surface-2);border-radius:var(--r-s);padding:10px 11px;font-size:15px;-webkit-appearance:none;appearance:none}
+.field select{background-image:linear-gradient(45deg,transparent 50%,var(--ink-2) 50%),linear-gradient(135deg,var(--ink-2) 50%,transparent 50%);background-position:calc(100% - 16px) 52%,calc(100% - 11px) 52%;background-size:5px 5px,5px 5px;background-repeat:no-repeat;padding-right:34px}
+.field textarea{min-height:92px;resize:vertical;line-height:1.5}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent);background:var(--surface);outline:none}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}
+.hint{font-size:12px;color:var(--ink-3);margin:-4px 0 12px}
+
+.paste-area{min-height:190px;font-size:14px;line-height:1.5}
+.status-line{font-size:13px;color:var(--ink-2);min-height:20px;margin:10px 0 0;display:flex;align-items:center;gap:8px}
+.status-line.err{color:var(--danger)}
+.spin{width:13px;height:13px;border:2px solid var(--line-2);border-top-color:var(--accent);border-radius:50%;animation:sp .7s linear infinite;flex:none}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+.actions{display:flex;gap:9px;align-items:center;margin-top:18px;padding-top:14px;border-top:1px solid var(--line)}
+.actions .spacer{flex:1}
+
+.trail{margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
+.trail h3{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-bottom:8px}
+.trail ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.trail li{display:flex;gap:8px;align-items:center;font-size:12.5px;color:var(--ink-2)}
+.trail .dot{width:6px;height:6px;border-radius:50%;background:var(--sc);flex:none}
+.trail time{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink-3);margin-left:auto}
+
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:90;background:var(--ink);color:var(--bg);font-size:13.5px;font-weight:500;padding:10px 16px;border-radius:999px;box-shadow:var(--shadow-2);max-width:calc(100% - 32px);text-align:center}
+.toast[hidden]{display:none!important}
+a.link{color:var(--accent);font-weight:600;text-decoration:none;border-bottom:1px solid var(--accent-soft)}
+a.link:hover{border-bottom-color:var(--accent)}
+</style>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <div class="brand">
+      <span class="mark" aria-hidden="true">@</span>
+      <div>
+        <h1>Get@role</h1>
+        <p class="sub" id="subline">Loading your pipeline…</p>
+      </div>
+    </div>
+    <button class="btn primary" id="btn-paste" type="button">Paste a job</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="notice" id="notice" hidden>
+    <span id="notice-text"></span>
+    <button class="btn ghost" id="notice-action" type="button" hidden></button>
+  </div>
+
+  <nav class="rail" id="rail" aria-label="Filter by stage"></nav>
+
+  <div class="toolbar">
+    <div class="search"><input id="q" type="search" placeholder="Search company, role, notes…" autocomplete="off"></div>
+    <select class="plain" id="sort" aria-label="Sort by">
+      <option value="deadline">Deadline first</option>
+      <option value="recent">Recently added</option>
+      <option value="company">Company A–Z</option>
+      <option value="stage">Stage</option>
+    </select>
+    <button class="btn ghost" id="btn-companies" type="button">Companies</button>
+    <button class="btn ghost" id="btn-new" type="button">+ Blank</button>
+    <button class="btn ghost" id="btn-csv" type="button">Export</button>
+  </div>
+
+  <div class="list" id="list"></div>
+
+  <div class="empty" id="empty" hidden>
+    <h2>Nothing tracked yet</h2>
+    <p>Copy a job or internship posting — the whole thing, mess and all — and paste it in. The fields fill themselves.</p>
+    <button class="btn primary" id="btn-paste-2" type="button">Paste a job</button>
+  </div>
+</main>
+
+<!-- paste sheet -->
+<div class="sheet" id="sheet-paste" hidden>
+  <div class="panel" role="dialog" aria-modal="true" aria-labelledby="paste-title">
+    <div class="panel-head">
+      <h2 id="paste-title">Paste a posting</h2>
+      <button class="x" type="button" data-close aria-label="Close">×</button>
+    </div>
+    <div class="field">
+      <label for="paste-text">A posting, an email, a WhatsApp forward — or a search agent's JSON</label>
+      <textarea id="paste-text" class="paste-area" placeholder="Software Engineering Intern — Summer 2027&#10;Paystack, Lagos (Hybrid)&#10;Stipend: ₦450,000/month&#10;Apply by 15 October. https://…"></textarea>
+    </div>
+    <p class="status-line" id="paste-status"></p>
+    <div class="actions">
+      <button class="btn primary" id="btn-extract" type="button">Fill it in</button>
+      <button class="btn ghost" id="btn-manual" type="button">Skip, I'll type it</button>
+    </div>
+  </div>
+</div>
+
+<!-- company directory -->
+<div class="sheet" id="sheet-co" hidden>
+  <div class="panel" role="dialog" aria-modal="true" aria-labelledby="co-title">
+    <div class="panel-head">
+      <div>
+        <h2 id="co-title">Who hires designers</h2>
+        <p class="sub" id="co-sub"></p>
+      </div>
+      <button class="x" type="button" data-close aria-label="Close">×</button>
+    </div>
+    <div class="co-tools">
+      <div class="search"><input id="co-q" type="search" placeholder="Search company, sector, city…" autocomplete="off"></div>
+      <div class="co-rail" id="co-rail-group" aria-label="Filter by region"></div>
+      <div class="co-rail" id="co-rail-disc" aria-label="Filter by design discipline"></div>
+      <div class="co-rail" id="co-rail-where" aria-label="Filter by where the roles are"></div>
+    </div>
+    <div id="co-body"></div>
+    <p class="co-note" id="co-note"></p>
+  </div>
+</div>
+
+<!-- edit sheet -->
+<div class="sheet" id="sheet-edit" hidden>
+  <div class="panel" role="dialog" aria-modal="true" aria-labelledby="edit-title">
+    <div class="panel-head">
+      <h2 id="edit-title">New application</h2>
+      <button class="x" type="button" data-close aria-label="Close">×</button>
+    </div>
+    <form id="form" novalidate>
+      <div class="field">
+        <label for="f-role">Role</label>
+        <input id="f-role" name="role" type="text" autocomplete="off" placeholder="Software Engineering Intern">
+      </div>
+      <div class="field">
+        <label for="f-company">Company</label>
+        <input id="f-company" name="company" type="text" autocomplete="off" placeholder="Paystack">
+      </div>
+      <div class="grid2">
+        <div class="field">
+          <label for="f-status">Stage</label>
+          <select id="f-status" name="status"></select>
+        </div>
+        <div class="field">
+          <label for="f-type">Type</label>
+          <select id="f-type" name="type"></select>
+        </div>
+      </div>
+      <div class="grid2">
+        <div class="field">
+          <label for="f-deadline">Apply by</label>
+          <input id="f-deadline" name="deadline" type="date">
+        </div>
+        <div class="field">
+          <label for="f-appliedOn">Applied on</label>
+          <input id="f-appliedOn" name="appliedOn" type="date">
+        </div>
+      </div>
+      <div class="grid2">
+        <div class="field">
+          <label for="f-location">Location</label>
+          <input id="f-location" name="location" type="text" autocomplete="off" placeholder="Lagos">
+        </div>
+        <div class="field">
+          <label for="f-workMode">Work mode</label>
+          <select id="f-workMode" name="workMode"></select>
+        </div>
+      </div>
+      <div class="grid2">
+        <div class="field">
+          <label for="f-salary">Pay / stipend</label>
+          <input id="f-salary" name="salary" type="text" autocomplete="off" placeholder="₦450,000 / month">
+        </div>
+        <div class="field">
+          <label for="f-source">Found via</label>
+          <input id="f-source" name="source" type="text" autocomplete="off" placeholder="LinkedIn">
+        </div>
+      </div>
+      <div class="field">
+        <label for="f-link">Posting link</label>
+        <input id="f-link" name="link" type="url" inputmode="url" autocomplete="off" placeholder="https://">
+      </div>
+      <div class="field">
+        <label for="f-contact">Contact</label>
+        <input id="f-contact" name="contact" type="text" autocomplete="off" placeholder="careers@company.com">
+      </div>
+      <div class="field">
+        <label for="f-notes">Notes</label>
+        <textarea id="f-notes" name="notes" placeholder="Requirements, referral, what to prepare…"></textarea>
+      </div>
+      <div class="trail" id="trail" hidden>
+        <h3>Stage history</h3>
+        <ol id="trail-list"></ol>
+      </div>
+      <div class="actions">
+        <button class="btn danger" id="btn-delete" type="button" hidden>Delete</button>
+        <span class="spacer"></span>
+        <button class="btn ghost" type="button" data-close>Cancel</button>
+        <button class="btn primary" id="btn-save" type="submit">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+
+<script>
+(function(){
+  "use strict";
+
+  var STATUSES = [
+    {k:"saved",     label:"To apply"},
+    {k:"applied",   label:"Applied"},
+    {k:"replied",   label:"Replied"},
+    {k:"interview", label:"Interview"},
+    {k:"offer",     label:"Offer"},
+    {k:"rejected",  label:"Unsuccessful"},
+    {k:"ghosted",   label:"No response"}
+  ];
+  var SMAP = {}; STATUSES.forEach(function(s,i){ SMAP[s.k] = s; s.order = i; });
+  var TYPES = ["Internship","Graduate scheme","Full-time","Part-time","Contract","Fellowship","Volunteer"];
+  var MODES = ["On-site","Hybrid","Remote"];
+  var FIELDS = ["role","company","status","type","deadline","appliedOn","location","workMode","salary","source","link","contact","notes"];
+  var CACHE_KEY = "getatrole.cache.v1";
+  var PREF_KEY  = "getatrole.prefs.v1";
+
+  var items = [], mode = "connecting", col = null, sampleFn = null, downloadsNs = null;
+  var filter = "all", query = "", sortBy = "deadline", editingId = null, migrated = false;
+  var bootLocals = [];
+
+  var $ = function(s){ return document.querySelector(s); };
+  var list = $("#list"), rail = $("#rail"), emptyBox = $("#empty"), toastEl = $("#toast");
+
+  /* ---------- helpers ---------- */
+  function esc(s){
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+    });
+  }
+  function todayISO(){
+    var d = new Date();
+    return d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0");
+  }
+  function daysUntil(iso){
+    if(!iso) return null;
+    var t = new Date(iso + "T12:00:00");
+    if(isNaN(t)) return null;
+    var now = new Date(); now.setHours(12,0,0,0);
+    return Math.round((t - now) / 86400000);
+  }
+  function prettyDate(iso){
+    if(!iso) return "";
+    var t = new Date(iso + "T12:00:00");
+    if(isNaN(t)) return iso;
+    return t.toLocaleDateString(undefined, {day:"numeric", month:"short"});
+  }
+  function toast(msg){
+    toastEl.textContent = msg; toastEl.hidden = false;
+    clearTimeout(toast._t);
+    toast._t = setTimeout(function(){ toastEl.hidden = true; }, 3200);
+  }
+  function readLS(key, fallback){
+    try { var v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; }
+    catch(e){ return fallback; }
+  }
+  function writeLS(key, val){
+    try { localStorage.setItem(key, JSON.stringify(val)); } catch(e){}
+  }
+  function cacheItems(){ writeLS(CACHE_KEY, items); }
+
+  /* ---------- store ---------- */
+  function blank(){
+    return {role:"", company:"", status:"saved", type:"", deadline:"", appliedOn:"",
+            location:"", workMode:"", salary:"", source:"", link:"", contact:"", notes:"",
+            createdAt:new Date().toISOString(), updatedAt:new Date().toISOString(),
+            trail:[{s:"saved", at:new Date().toISOString()}]};
+  }
+  function stripId(obj){
+    var out = {};
+    Object.keys(obj).forEach(function(k){ if(k !== "id" && k !== "_local") out[k] = obj[k]; });
+    return out;
+  }
+  function localId(){ return "l-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2,6); }
+
+  async function createItem(data){
+    data.updatedAt = new Date().toISOString();
+    if(mode === "db" && col){
+      var ref = col.doc();
+      await ref.set(stripId(data));
+      return ref.id;
+    }
+    var rec = stripId(data); rec.id = localId(); rec._local = true;
+    items.push(rec); cacheItems(); render();
+    return rec.id;
+  }
+  async function saveItem(id, data){
+    data.updatedAt = new Date().toISOString();
+    if(mode === "db" && col && String(id).slice(0,2) !== "l-"){
+      await col.doc(id).set(stripId(data));
+      return;
+    }
+    var i = items.findIndex(function(x){ return x.id === id; });
+    var rec = stripId(data); rec.id = id; rec._local = true;
+    if(i < 0) items.push(rec); else items[i] = rec;
+    cacheItems(); render();
+  }
+  async function deleteItem(id){
+    if(mode === "db" && col && String(id).slice(0,2) !== "l-"){
+      await col.doc(id).delete();
+      return;
+    }
+    items = items.filter(function(x){ return x.id !== id; });
+    cacheItems(); render();
+  }
+  function byId(id){ return items.filter(function(x){ return x.id === id; })[0]; }
+
+  /* ---------- filtering + sorting ---------- */
+  function visible(){
+    var q = query.trim().toLowerCase();
+    var out = items.filter(function(it){
+      if(filter !== "all" && it.status !== filter) return false;
+      if(!q) return true;
+      return [it.role,it.company,it.location,it.notes,it.source,it.type,it.salary]
+        .join(" ").toLowerCase().indexOf(q) > -1;
+    });
+    var open = {saved:0, applied:1, replied:2, interview:3, offer:4, rejected:5, ghosted:6};
+    out.sort(function(a,b){
+      if(sortBy === "company") return (a.company||"~").localeCompare(b.company||"~");
+      if(sortBy === "recent")  return String(b.createdAt||"").localeCompare(String(a.createdAt||""));
+      if(sortBy === "stage")   return (open[a.status]||0) - (open[b.status]||0);
+      var da = a.deadline || "9999-12-31", db_ = b.deadline || "9999-12-31";
+      if(da !== db_) return da < db_ ? -1 : 1;
+      return String(b.createdAt||"").localeCompare(String(a.createdAt||""));
+    });
+    return out;
+  }
+
+  /* ---------- render ---------- */
+  function render(){
+    var counts = {all: items.length};
+    STATUSES.forEach(function(s){ counts[s.k] = 0; });
+    items.forEach(function(it){ if(counts[it.status] != null) counts[it.status]++; });
+
+    rail.innerHTML =
+      '<button class="stage" type="button" data-stage="all" aria-pressed="' + (filter === "all") + '">' +
+        '<span class="dot" style="--sc:var(--accent)"></span>All <span class="n">' + counts.all + '</span></button>' +
+      STATUSES.map(function(s){
+        return '<button class="stage" type="button" data-stage="' + s.k + '" aria-pressed="' + (filter === s.k) + '" style="--sc:var(--st-' + s.k + ')">' +
+               '<span class="dot"></span>' + s.label + ' <span class="n">' + counts[s.k] + '</span></button>';
+      }).join("");
+
+    var soon = items.filter(function(it){
+      var d = daysUntil(it.deadline);
+      return it.status === "saved" && d !== null && d >= 0 && d <= 7;
+    }).length;
+    var waiting = items.filter(function(it){ return it.status === "applied"; }).length;
+    var bits = [items.length + (items.length === 1 ? " role tracked" : " roles tracked")];
+    if(soon) bits.push(soon + " closing this week");
+    if(waiting) bits.push(waiting + " awaiting a reply");
+    if(mode === "local") bits.push("on this device only");
+    $("#subline").textContent = bits.join("  ·  ");
+
+    var rows = visible();
+    emptyBox.hidden = items.length !== 0;
+    list.hidden = items.length === 0;
+
+    if(items.length && !rows.length){
+      list.innerHTML = '<p style="color:var(--ink-3);font-size:14px;grid-column:1/-1;padding:18px 2px">No matches. Try another search or stage.</p>';
+    } else {
+      list.innerHTML = rows.map(card).join("");
+    }
+
+    var exCount = items.filter(function(it){ return it.isExample; }).length;
+    var nt = $("#notice"), na = $("#notice-action");
+    if(exCount){
+      nt.hidden = false;
+      $("#notice-text").textContent = exCount + " example rows are here so you can see how it looks.";
+      na.hidden = false; na.textContent = "Remove examples"; na.dataset.act = "clear-examples";
+    } else if(mode === "local"){
+      nt.hidden = false;
+      $("#notice-text").textContent = "Saving to this browser only — cloud sync is unavailable in this view.";
+      na.hidden = true;
+    } else {
+      nt.hidden = true;
+    }
+  }
+
+  function dueChip(it){
+    if(!it.deadline) return "";
+    var d = daysUntil(it.deadline);
+    if(d === null) return "";
+    var done = it.status !== "saved";
+    if(done) return '<span class="due past">' + prettyDate(it.deadline) + "</span>";
+    if(d < 0)  return '<span class="due past">closed ' + prettyDate(it.deadline) + "</span>";
+    if(d === 0) return '<span class="due hot">due today</span>';
+    if(d <= 3) return '<span class="due hot">' + d + "d left</span>";
+    if(d <= 10) return '<span class="due warn">' + d + "d left</span>";
+    return '<span class="due">' + prettyDate(it.deadline) + "</span>";
+  }
+
+  function card(it){
+    var s = SMAP[it.status] || SMAP.saved;
+    var facts = [];
+    if(it.type) facts.push('<span class="tag">' + esc(it.type) + "</span>");
+    if(it.workMode) facts.push('<span class="tag">' + esc(it.workMode) + "</span>");
+    if(it.salary) facts.push('<span class="tag mono">' + esc(it.salary) + "</span>");
+    if(it.source) facts.push('<span class="tag">via ' + esc(it.source) + "</span>");
+    if(it.appliedOn && it.status !== "saved") facts.push('<span class="tag">applied ' + esc(prettyDate(it.appliedOn)) + "</span>");
+    if(it.isExample) facts.push('<span class="tag ex">example</span>');
+
+    var where = [it.company || "Unknown company", it.location].filter(Boolean);
+    var opts = STATUSES.map(function(o){
+      return '<option value="' + o.k + '"' + (o.k === it.status ? " selected" : "") + ">" + o.label + "</option>";
+    }).join("");
+
+    return '<article class="card" data-id="' + esc(it.id) + '" style="--sc:var(--st-' + s.k + ');--sc-bg:var(--st-' + s.k + '-bg)">' +
+      '<div class="card-main">' +
+        '<div class="line1"><h3 class="role">' + esc(it.role || "Untitled role") + "</h3>" + dueChip(it) + "</div>" +
+        '<p class="company"><b>' + esc(where[0]) + "</b>" + (where[1] ? " · " + esc(where[1]) : "") + "</p>" +
+        (facts.length ? '<div class="facts">' + facts.join("") + "</div>" : "") +
+      "</div>" +
+      '<select class="pill" data-stage-for="' + esc(it.id) + '" aria-label="Stage for ' + esc(it.role || "this role") + '">' + opts + "</select>" +
+    "</article>";
+  }
+
+  /* ---------- sheets ---------- */
+  function openSheet(id){
+    $(id).hidden = false;
+    document.body.style.overflow = "hidden";
+  }
+  function closeSheets(){
+    $("#sheet-paste").hidden = true;
+    $("#sheet-edit").hidden = true;
+    document.body.style.overflow = "";
+  }
+  document.addEventListener("click", function(e){
+    var c = e.target.closest("[data-close]");
+    if(c) { closeSheets(); return; }
+    if(e.target.classList.contains("sheet")) closeSheets();
+  });
+  document.addEventListener("keydown", function(e){
+    if(e.key === "Escape") closeSheets();
+  });
+
+  function fillSelect(el, values, withBlank){
+    el.innerHTML = (withBlank ? '<option value="">—</option>' : "") +
+      values.map(function(v){
+        var val = typeof v === "string" ? v : v.k;
+        var lab = typeof v === "string" ? v : v.label;
+        return '<option value="' + esc(val) + '">' + esc(lab) + "</option>";
+      }).join("");
+  }
+  fillSelect($("#f-status"), STATUSES, false);
+  fillSelect($("#f-type"), TYPES, true);
+  fillSelect($("#f-workMode"), MODES, true);
+
+  function openEditor(data, id){
+    editingId = id || null;
+    var d = data || blank();
+    FIELDS.forEach(function(f){
+      var el = document.getElementById("f-" + f);
+      if(el) el.value = d[f] == null ? "" : d[f];
+    });
+    $("#edit-title").textContent = editingId ? "Edit application" : "New application";
+    $("#btn-delete").hidden = !editingId;
+
+    var trail = (d.trail || []).slice().reverse();
+    $("#trail").hidden = trail.length < 2;
+    $("#trail-list").innerHTML = trail.map(function(t){
+      var s = SMAP[t.s] || SMAP.saved;
+      var when = t.at ? new Date(t.at) : null;
+      return '<li style="--sc:var(--st-' + s.k + ')"><span class="dot"></span>' + esc(s.label) +
+             (when && !isNaN(when) ? "<time>" + esc(when.toLocaleDateString(undefined,{day:"numeric",month:"short",year:"2-digit"})) + "</time>" : "") +
+             "</li>";
+    }).join("");
+
+    openSheet("#sheet-edit");
+    setTimeout(function(){ if(!editingId) $("#f-role").focus(); }, 60);
+  }
+
+  $("#form").addEventListener("submit", async function(e){
+    e.preventDefault();
+    var prev = editingId ? byId(editingId) : null;
+    var d = prev ? JSON.parse(JSON.stringify(prev)) : blank();
+    FIELDS.forEach(function(f){
+      var el = document.getElementById("f-" + f);
+      if(el) d[f] = el.value.trim();
+    });
+    if(!d.role && !d.company){ toast("Add a role or a company first."); return; }
+    if(d.link && !/^https?:\/\//i.test(d.link)) d.link = "https://" + d.link;
+    if(!prev || prev.status !== d.status){
+      d.trail = (d.trail || []).concat([{s:d.status, at:new Date().toISOString()}]);
+      if(d.status === "applied" && !d.appliedOn) d.appliedOn = todayISO();
+    }
+    delete d.isExample;
+    var btn = $("#btn-save"); btn.disabled = true;
+    try{
+      if(editingId) await saveItem(editingId, d);
+      else await createItem(d);
+      closeSheets();
+      toast(editingId ? "Saved." : "Added to your pipeline.");
+    }catch(err){
+      toast("Could not save. " + (err && err.code === "quota_exceeded" ? "Your tracker is full — delete something old." : "Try again."));
+    }finally{ btn.disabled = false; }
+  });
+
+  $("#btn-delete").addEventListener("click", async function(){
+    if(!editingId) return;
+    var it = byId(editingId);
+    if(!confirm("Delete " + (it && it.role ? it.role : "this application") + "? This cannot be undone.")) return;
+    try{ await deleteItem(editingId); closeSheets(); toast("Deleted."); }
+    catch(e){ toast("Could not delete. Try again."); }
+  });
+
+  /* ---------- list interactions ---------- */
+  list.addEventListener("change", async function(e){
+    var sel = e.target.closest("[data-stage-for]");
+    if(!sel) return;
+    var id = sel.getAttribute("data-stage-for");
+    var it = byId(id); if(!it) return;
+    var d = JSON.parse(JSON.stringify(it));
+    d.status = sel.value;
+    d.trail = (d.trail || []).concat([{s:d.status, at:new Date().toISOString()}]);
+    if(d.status === "applied" && !d.appliedOn) d.appliedOn = todayISO();
+    delete d.isExample;
+    try{ await saveItem(id, d); toast("Moved to " + (SMAP[d.status] || {}).label + "."); }
+    catch(err){ toast("Could not update. Try again."); render(); }
+  });
+  list.addEventListener("click", function(e){
+    if(e.target.closest("[data-stage-for]")) return;
+    var c = e.target.closest(".card");
+    if(!c) return;
+    var it = byId(c.getAttribute("data-id"));
+    if(it) openEditor(it, it.id);
+  });
+
+  rail.addEventListener("click", function(e){
+    var b = e.target.closest("[data-stage]");
+    if(!b) return;
+    filter = b.getAttribute("data-stage");
+    savePrefs(); render();
+  });
+
+  $("#q").addEventListener("input", function(e){ query = e.target.value; render(); });
+  $("#sort").addEventListener("change", function(e){ sortBy = e.target.value; savePrefs(); render(); });
+  $("#btn-new").addEventListener("click", function(){ openEditor(null, null); });
+  $("#btn-paste").addEventListener("click", openPaste);
+  $("#btn-paste-2").addEventListener("click", openPaste);
+  $("#notice-action").addEventListener("click", async function(){
+    if(this.dataset.act !== "clear-examples") return;
+    var ex = items.filter(function(it){ return it.isExample; });
+    for(var i = 0; i < ex.length; i++){ try{ await deleteItem(ex[i].id); }catch(e){} }
+    toast("Examples removed.");
+  });
+
+  function savePrefs(){ writeLS(PREF_KEY, {filter:filter, sortBy:sortBy}); }
+
+  /* ---------- paste + extract ---------- */
+  function openPaste(){
+    $("#paste-text").value = "";
+    setPasteStatus("", false);
+    openSheet("#sheet-paste");
+    setTimeout(function(){ $("#paste-text").focus(); }, 60);
+  }
+  function setPasteStatus(msg, busy, isErr){
+    var el = $("#paste-status");
+    el.className = "status-line" + (isErr ? " err" : "");
+    el.innerHTML = (busy ? '<span class="spin"></span>' : "") + esc(msg);
+  }
+  $("#btn-manual").addEventListener("click", function(){
+    var raw = $("#paste-text").value.trim();
+    closeSheets();
+    var d = blank();
+    if(raw){ var guess = localParse(raw); Object.keys(guess).forEach(function(k){ if(guess[k]) d[k] = guess[k]; }); }
+    openEditor(d, null);
+  });
+
+  $("#btn-extract").addEventListener("click", async function(){
+    var raw = $("#paste-text").value.trim();
+    if(!raw){ setPasteStatus("Paste the posting first.", false, true); return; }
+    var btn = this;
+
+    var bulk = asJobList(raw);
+    if(bulk){
+      btn.disabled = true;
+      setPasteStatus("Adding " + bulk.length + (bulk.length === 1 ? " role" : " roles") + "…", true);
+      try{
+        var added = await bulkImport(bulk);
+        closeSheets();
+        toast(added.added + " added" + (added.skipped ? ", " + added.skipped + " already tracked" : "") + ".");
+      }catch(e){
+        setPasteStatus("Could not add those. Try again.", false, true);
+      }finally{ btn.disabled = false; }
+      return;
+    }
+
+    var guess = localParse(raw);
+
+    if(!sampleFn){
+      closeSheets();
+      var d0 = blank();
+      Object.keys(guess).forEach(function(k){ if(guess[k]) d0[k] = guess[k]; });
+      openEditor(d0, null);
+      toast("Filled what I could read — check the fields.");
+      return;
+    }
+
+    btn.disabled = true;
+    setPasteStatus("Reading the posting…", true);
+    var text = raw.slice(0, 12000);
+    var prompt =
+      "You are filling in a job-application tracker from a posting someone pasted. Today is " + todayISO() + ".\n" +
+      "Reply with ONLY a JSON object, no commentary, with exactly these keys:\n" +
+      '{"role":"","company":"","location":"","workMode":"","type":"","salary":"","deadline":"","link":"","source":"","contact":"","notes":""}\n' +
+      "Rules:\n" +
+      '- Use "" for anything the posting does not state. Never invent a value.\n' +
+      '- role: the job title only, no company name, no seniority boilerplate.\n' +
+      '- workMode: exactly one of "Remote", "Hybrid", "On-site", or "".\n' +
+      '- type: exactly one of "Internship", "Graduate scheme", "Full-time", "Part-time", "Contract", "Fellowship", "Volunteer", or "".\n' +
+      '- deadline: the application closing date as YYYY-MM-DD. Resolve relative wording like "in two weeks" against today. "" if none is given.\n' +
+      '- salary: keep the posting’s own currency and period, e.g. "₦450,000 / month".\n' +
+      '- link: the application URL if one appears.\n' +
+      '- source: where it was posted if stated (LinkedIn, Indeed, company site, a referral name).\n' +
+      '- contact: an email address or named recruiter if given.\n' +
+      '- notes: at most 3 short lines — key requirements and how to apply. No markdown.\n\n' +
+      "Posting:\n\"\"\"\n" + text + "\n\"\"\"";
+
+    try{
+      var out = await sampleFn.json(prompt, {modelTier:"default"});
+      if(!out || typeof out !== "object" || Array.isArray(out)) throw {code:"invalid_json"};
+      var d = blank();
+      ["role","company","location","workMode","type","salary","deadline","link","source","contact","notes"].forEach(function(k){
+        var v = out[k];
+        d[k] = (typeof v === "string" ? v : (v == null ? "" : String(v))).trim();
+      });
+      Object.keys(guess).forEach(function(k){ if(!d[k] && guess[k]) d[k] = guess[k]; });
+      if(!/^\d{4}-\d{2}-\d{2}$/.test(d.deadline)) d.deadline = guess.deadline || "";
+      if(MODES.indexOf(d.workMode) < 0) d.workMode = "";
+      if(TYPES.indexOf(d.type) < 0) d.type = guess.type || "";
+      closeSheets();
+      openEditor(d, null);
+      toast("Filled in — check it over, then save.");
+    }catch(err){
+      var code = err && err.code;
+      if(code === "not_granted" || code === "sampling_disabled" || code === "not_declared" || code === "capability_disabled" || code === "capability_removed"){
+        sampleFn = null;
+        closeSheets();
+        var d2 = blank();
+        Object.keys(guess).forEach(function(k){ if(guess[k]) d2[k] = guess[k]; });
+        openEditor(d2, null);
+        toast("Filled what I could read — check the fields.");
+      } else if(code === "rate_limited"){
+        setPasteStatus("Too many requests just now. Wait a minute, or tap “Skip, I’ll type it”.", false, true);
+      } else if(code === "prompt_too_large"){
+        setPasteStatus("That posting is very long. Paste the top half and try again.", false, true);
+      } else {
+        setPasteStatus("Could not read that one. Try again, or tap “Skip, I’ll type it”.", false, true);
+      }
+    }finally{ btn.disabled = false; }
+  });
+
+  /* ---------- bulk import (the search agent's output) ---------- */
+  function asJobList(raw){
+    var t = raw.trim();
+    if(t.charAt(0) !== "[" && t.charAt(0) !== "{") return null;
+    var parsed;
+    try{ parsed = JSON.parse(t); }catch(e){ return null; }
+    var rows = Array.isArray(parsed) ? parsed : [parsed];
+    rows = rows.filter(function(r){
+      return r && typeof r === "object" && !Array.isArray(r) && (r.role || r.company);
+    });
+    return rows.length ? rows : null;
+  }
+
+  async function bulkImport(rows){
+    var known = {};
+    items.forEach(function(it){
+      known[(String(it.company||"") + "::" + String(it.role||"")).toLowerCase().trim()] = true;
+    });
+    var added = 0, skipped = 0;
+    for(var i = 0; i < rows.length; i++){
+      var r = rows[i];
+      var key = (String(r.company||"") + "::" + String(r.role||"")).toLowerCase().trim();
+      if(known[key]){ skipped++; continue; }
+      known[key] = true;
+      var d = blank();
+      ["role","company","location","workMode","type","salary","deadline","link","source","contact","notes"].forEach(function(k){
+        if(r[k] != null) d[k] = String(r[k]).trim();
+      });
+      if(STATUSES.filter(function(s){ return s.k === r.status; }).length){
+        d.status = r.status;
+        d.trail = [{s:d.status, at:new Date().toISOString()}];
+      }
+      if(!/^\d{4}-\d{2}-\d{2}$/.test(d.deadline)) d.deadline = normalizeDate(d.deadline) || "";
+      if(MODES.indexOf(d.workMode) < 0) d.workMode = "";
+      if(TYPES.indexOf(d.type) < 0) d.type = "";
+      if(d.link && !/^https?:\/\//i.test(d.link)) d.link = "https://" + d.link;
+      try{ await createItem(d); added++; }catch(e){ /* keep going */ }
+    }
+    return {added:added, skipped:skipped};
+  }
+
+  /* ---------- company directory ---------- */
+  // Regenerated by `node src/directory.js && node src/embed.js` in the agent folder.
+  var DIRECTORY = /*__DIRECTORY_START__*/{"verifiedAt":"2026-09-20T16:30:37.999Z","groups":["Global big tech","US Fortune 500","UK & Ireland","Europe","Asia-Pacific"],"companies":[{"name":"Google","group":"Global big tech","hq":"Mountain View, US","sector":"Search & cloud","site":"https://about.google","careers":"https://www.google.com/about/careers/applications/","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Google","x":"https://x.com/search?q=Google&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Google","dribbble":"https://dribbble.com/search/Google"}},{"name":"Apple","group":"Global big tech","hq":"Cupertino, US","sector":"Consumer hardware","site":"https://www.apple.com","careers":"https://jobs.apple.com/en-us/search","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Apple","x":"https://x.com/search?q=Apple&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Apple","dribbble":"https://dribbble.com/search/Apple"}},{"name":"Microsoft","group":"Global big tech","hq":"Redmond, US","sector":"Software & cloud","site":"https://www.microsoft.com","careers":"https://jobs.careers.microsoft.com/global/en/search","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Microsoft","x":"https://x.com/search?q=Microsoft&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Microsoft","dribbble":"https://dribbble.com/search/Microsoft"}},{"name":"Amazon","group":"Global big tech","hq":"Seattle, US","sector":"E-commerce & cloud","site":"https://www.aboutamazon.com","careers":"https://www.amazon.jobs/en/search","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Amazon","x":"https://x.com/search?q=Amazon&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Amazon","dribbble":"https://dribbble.com/search/Amazon"}},{"name":"Meta","group":"Global big tech","hq":"Menlo Park, US","sector":"Social","site":"https://about.meta.com","careers":"https://www.metacareers.com/jobs/","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Meta","x":"https://x.com/search?q=Meta&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Meta","dribbble":"https://dribbble.com/search/Meta"}},{"name":"Netflix","group":"Global big tech","hq":"Los Gatos, US","sector":"Streaming","site":"https://www.netflix.com","careers":"https://explore.jobs.netflix.net/careers","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Netflix","x":"https://x.com/search?q=Netflix&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Netflix","dribbble":"https://dribbble.com/search/Netflix"}},{"name":"Adobe","group":"Global big tech","hq":"San Jose, US","sector":"Creative software","site":"https://www.adobe.com","careers":"https://careers.adobe.com/us/en/search-results","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Adobe","x":"https://x.com/search?q=Adobe&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Adobe","dribbble":"https://dribbble.com/search/Adobe"}},{"name":"Salesforce","group":"Global big tech","hq":"San Francisco, US","sector":"Enterprise SaaS","site":"https://www.salesforce.com","careers":"https://careers.salesforce.com/en/jobs/","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Salesforce","x":"https://x.com/search?q=Salesforce&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Salesforce","dribbble":"https://dribbble.com/search/Salesforce"}},{"name":"IBM","group":"Global big tech","hq":"Armonk, US","sector":"Enterprise IT","site":"https://www.ibm.com","careers":"https://www.ibm.com/careers/search","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=IBM","x":"https://x.com/search?q=IBM&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=IBM","dribbble":"https://dribbble.com/search/IBM"}},{"name":"NVIDIA","group":"Global big tech","hq":"Santa Clara, US","sector":"Semiconductors","site":"https://www.nvidia.com","careers":"https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=NVIDIA","x":"https://x.com/search?q=NVIDIA&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=NVIDIA","dribbble":"https://dribbble.com/search/NVIDIA"}},{"name":"Oracle","group":"Global big tech","hq":"Austin, US","sector":"Enterprise software","site":"https://www.oracle.com","careers":"https://careers.oracle.com/jobs","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Oracle","x":"https://x.com/search?q=Oracle&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Oracle","dribbble":"https://dribbble.com/search/Oracle"}},{"name":"Cisco","group":"Global big tech","hq":"San Jose, US","sector":"Networking","site":"https://www.cisco.com","careers":"https://jobs.cisco.com/jobs/SearchJobs","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Cisco","x":"https://x.com/search?q=Cisco&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Cisco","dribbble":"https://dribbble.com/search/Cisco"}},{"name":"Intel","group":"Global big tech","hq":"Santa Clara, US","sector":"Semiconductors","site":"https://www.intel.com","careers":"https://jobs.intel.com/en/search-jobs","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Intel","x":"https://x.com/search?q=Intel&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Intel","dribbble":"https://dribbble.com/search/Intel"}},{"name":"OpenAI","group":"Global big tech","hq":"San Francisco, US","sector":"AI","site":"https://openai.com","careers":"https://openai.com/careers","board":"https://jobs.ashbyhq.com/openai","designRoles":22,"designTitles":["Data Center Design Engineer, Electrical","Design Verification Engineer ","Physical Design Engineer ","Hardware / Software CoDesign Engineer  - 3P"],"disciplines":["product","graphic"],"hiringIn":["North America"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=OpenAI","x":"https://x.com/search?q=OpenAI&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=OpenAI","dribbble":"https://dribbble.com/search/OpenAI"}},{"name":"Anthropic","group":"Global big tech","hq":"San Francisco, US","sector":"AI","site":"https://www.anthropic.com","careers":"https://www.anthropic.com/careers","board":"https://boards.greenhouse.io/anthropic","designRoles":7,"designTitles":["Head of Policy Design, Societal Harms","Physical Security Design Lead and Contract Document Specialist","Policy Design Manager, Conventional Weapons","Product Designer, Evals & Prompts"],"disciplines":["product"],"hiringIn":["North America","Remote"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Anthropic","x":"https://x.com/search?q=Anthropic&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Anthropic","dribbble":"https://dribbble.com/search/Anthropic"}},{"name":"Stripe","group":"Global big tech","hq":"South San Francisco, US","sector":"Payments","site":"https://stripe.com","careers":"https://stripe.com/jobs","board":"https://boards.greenhouse.io/stripe","designRoles":27,"designTitles":["Account Executive, SMB (Benelux)","Creative Director, Copy & Campaigns","Creative Director, Event Design","Customer Funds Reconciliation Manager, Luxembourg"],"disciplines":["product","uiux","graphic"],"hiringIn":["UK & Ireland","Europe","Asia-Pacific","North America","Remote"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Stripe","x":"https://x.com/search?q=Stripe&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Stripe","dribbble":"https://dribbble.com/search/Stripe"}},{"name":"Figma","group":"Global big tech","hq":"San Francisco, US","sector":"Design tools","site":"https://www.figma.com","careers":"https://www.figma.com/careers/","board":"https://boards.greenhouse.io/figma","designRoles":16,"designTitles":["Brand Designer,  Product Launches","Brand Design Intern (Summer 2027)","Designer Advocate ","Designer Advocate (London, United Kingdom)"],"disciplines":["product","uiux","graphic"],"hiringIn":["UK & Ireland","North America"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Figma","x":"https://x.com/search?q=Figma&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Figma","dribbble":"https://dribbble.com/search/Figma"}},{"name":"Databricks","group":"Global big tech","hq":"San Francisco, US","sector":"Data & AI","site":"https://www.databricks.com","careers":"https://www.databricks.com/company/careers","board":"https://boards.greenhouse.io/databricks","designRoles":16,"designTitles":["Engineering Manager - UI Platform","Enterprise Account Executive, Benelux","Enterprise Hunter Account Executive, Benelux ","Senior Designated Support Engineer"],"disciplines":["product","uiux"],"hiringIn":["Europe","Asia-Pacific","North America"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Databricks","x":"https://x.com/search?q=Databricks&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Databricks","dribbble":"https://dribbble.com/search/Databricks"}},{"name":"Pinterest","group":"Global big tech","hq":"San Francisco, US","sector":"Social","site":"https://www.pinterest.com","careers":"https://www.pinterestcareers.com/","board":"https://boards.greenhouse.io/pinterest","designRoles":8,"designTitles":["Administrative Business Partner I - Engineering, Product and Design","Content Designer II, Personalization","Industry Manager II, Beauty & Luxury","Principal Product Designer, AI Native, Core"],"disciplines":["product","uiux","graphic"],"hiringIn":["North America","Remote"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Pinterest","x":"https://x.com/search?q=Pinterest&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Pinterest","dribbble":"https://dribbble.com/search/Pinterest"}},{"name":"Reddit","group":"Global big tech","hq":"San Francisco, US","sector":"Social","site":"https://www.reddit.com","careers":"https://www.redditinc.com/careers","board":"https://boards.greenhouse.io/reddit","designRoles":7,"designTitles":["Principal UX Engineer, Ads","Senior Android Engineer, Design System","Senior Creative Strategist - App Dev","Senior Frontend Engineer, Ads Creative"],"disciplines":["product","uiux","graphic"],"hiringIn":["North America","Remote"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Reddit","x":"https://x.com/search?q=Reddit&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Reddit","dribbble":"https://dribbble.com/search/Reddit"}},{"name":"Discord","group":"Global big tech","hq":"San Francisco, US","sector":"Social","site":"https://discord.com","careers":"https://discord.com/careers","board":"https://boards.greenhouse.io/discord","designRoles":4,"designTitles":["Product Designer, Growth","Senior Product Designer, Consumer Revenue","Senior Product Designer, Developer Success","Senior Product Design Manager, Growth"],"disciplines":["product"],"hiringIn":["North America"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Discord","x":"https://x.com/search?q=Discord&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Discord","dribbble":"https://dribbble.com/search/Discord"}},{"name":"Roblox","group":"Global big tech","hq":"San Mateo, US","sector":"Gaming","site":"https://www.roblox.com","careers":"https://careers.roblox.com/","board":"https://boards.greenhouse.io/roblox","designRoles":11,"designTitles":["[2027] Associate Product Designer, Early Career","Creative Director","Design Engineer","Principal Frontend Software Engineer - Discovery UX"],"disciplines":["product","uiux","graphic"],"hiringIn":["North America"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Roblox","x":"https://x.com/search?q=Roblox&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Roblox","dribbble":"https://dribbble.com/search/Roblox"}},{"name":"Dropbox","group":"Global big tech","hq":"San Francisco, US","sector":"Productivity","site":"https://www.dropbox.com","careers":"","board":"https://boards.greenhouse.io/dropbox","designRoles":0,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Dropbox","x":"https://x.com/search?q=Dropbox&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Dropbox","dribbble":"https://dribbble.com/search/Dropbox"}},{"name":"Cloudflare","group":"Global big tech","hq":"San Francisco, US","sector":"Internet infrastructure","site":"https://www.cloudflare.com","careers":"https://www.cloudflare.com/careers/","board":"https://boards.greenhouse.io/cloudflare","designRoles":5,"designTitles":["Director, Global Design & Construction","Senior Design Engineer","Senior Named Account Executive, Benelux","Senior Principal, Sales Compensation Design & Strategy"],"disciplines":[],"hiringIn":["Remote"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Cloudflare","x":"https://x.com/search?q=Cloudflare&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Cloudflare","dribbble":"https://dribbble.com/search/Cloudflare"}},{"name":"Coinbase","group":"Global big tech","hq":"Remote, US","sector":"Crypto","site":"https://www.coinbase.com","careers":"","board":"https://boards.greenhouse.io/coinbase","designRoles":5,"designTitles":["Head of Product Creative ","Product Designer II, Design Systems","Product Design Intern","Senior Product Designer, Coinbase One"],"disciplines":["product","uiux","graphic"],"hiringIn":["North America","Remote"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Coinbase","x":"https://x.com/search?q=Coinbase&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Coinbase","dribbble":"https://dribbble.com/search/Coinbase"}},{"name":"Notion","group":"Global big tech","hq":"San Francisco, US","sector":"Productivity","site":"https://www.notion.so","careers":"https://www.notion.so/careers","board":"https://jobs.ashbyhq.com/notion","designRoles":4,"designTitles":["Product Designer","Business Development Representative, Benelux","Workflow + Process Designer (AI Enablement)","Brand Designer, Creative Studio"],"disciplines":["product","graphic"],"hiringIn":["UK & Ireland","Europe","North America"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Notion","x":"https://x.com/search?q=Notion&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Notion","dribbble":"https://dribbble.com/search/Notion"}},{"name":"Linear","group":"Global big tech","hq":"Remote","sector":"Developer tools","site":"https://linear.app","careers":"https://linear.app/careers","board":"https://jobs.ashbyhq.com/linear","designRoles":7,"designTitles":["Design Engineer (Web & Brand)","Design Engineer (Web & Brand)","Senior / Staff Product Designer","Principal Product Designer"],"disciplines":["product"],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Linear","x":"https://x.com/search?q=Linear&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Linear","dribbble":"https://dribbble.com/search/Linear"}},{"name":"Airbnb","group":"Global big tech","hq":"San Francisco, US","sector":"Travel","site":"https://www.airbnb.com","careers":"https://careers.airbnb.com/","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Airbnb","x":"https://x.com/search?q=Airbnb&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Airbnb","dribbble":"https://dribbble.com/search/Airbnb"}},{"name":"Uber","group":"Global big tech","hq":"San Francisco, US","sector":"Mobility","site":"https://www.uber.com","careers":"https://www.uber.com/us/en/careers/list/","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Uber","x":"https://x.com/search?q=Uber&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Uber","dribbble":"https://dribbble.com/search/Uber"}},{"name":"Lyft","group":"Global big tech","hq":"San Francisco, US","sector":"Mobility","site":"https://www.lyft.com","careers":"https://www.lyft.com/careers","board":"https://boards.greenhouse.io/lyft","designRoles":4,"designTitles":["Operations Technology Product Designer","Product Design Manager, Design Systems","Product Design Manager, Design Systems","UX Research Intern (Summer 2027)"],"disciplines":["product","uiux"],"hiringIn":["North America"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Lyft","x":"https://x.com/search?q=Lyft&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Lyft","dribbble":"https://dribbble.com/search/Lyft"}},{"name":"Palantir","group":"Global big tech","hq":"Denver, US","sector":"Data platforms","site":"https://www.palantir.com","careers":"https://www.palantir.com/careers/","board":"https://jobs.lever.co/palantir","designRoles":14,"designTitles":["Product Designer","Product Designer - US Government","Product Designer - US Government","Product Designer, Internship"],"disciplines":["product"],"hiringIn":["UK & Ireland","North America"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Palantir","x":"https://x.com/search?q=Palantir&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Palantir","dribbble":"https://dribbble.com/search/Palantir"}},{"name":"Duolingo","group":"Global big tech","hq":"Pittsburgh, US","sector":"Education","site":"https://www.duolingo.com","careers":"https://careers.duolingo.com/","board":"https://boards.greenhouse.io/duolingo","designRoles":9,"designTitles":["Creative Sourcer","Senior Creative Director, Marketing","Senior Creative Director, Marketing","Senior Learning Designer, Indian Languages"],"disciplines":["product","graphic"],"hiringIn":["UK & Ireland","Asia-Pacific","North America"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Duolingo","x":"https://x.com/search?q=Duolingo&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Duolingo","dribbble":"https://dribbble.com/search/Duolingo"}},{"name":"Asana","group":"Global big tech","hq":"San Francisco, US","sector":"Productivity","site":"https://asana.com","careers":"https://asana.com/jobs","board":"https://boards.greenhouse.io/asana","designRoles":4,"designTitles":["Brand Designer","Product Designer","Product Designer","Product Designer, Coordinate"],"disciplines":["product","graphic"],"hiringIn":["Europe","North America"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Asana","x":"https://x.com/search?q=Asana&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Asana","dribbble":"https://dribbble.com/search/Asana"}},{"name":"Airtable","group":"Global big tech","hq":"San Francisco, US","sector":"Productivity","site":"https://www.airtable.com","careers":"https://www.airtable.com/careers","board":"https://boards.greenhouse.io/airtable","designRoles":1,"designTitles":["Product Designer (8+ YOE)"],"disciplines":["product"],"hiringIn":["North America"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Airtable","x":"https://x.com/search?q=Airtable&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Airtable","dribbble":"https://dribbble.com/search/Airtable"}},{"name":"Twilio","group":"Global big tech","hq":"San Francisco, US","sector":"Communications API","site":"https://www.twilio.com","careers":"https://www.twilio.com/en-us/company/jobs","board":"https://boards.greenhouse.io/twilio","designRoles":1,"designTitles":["Senior Manager, New Business DACH & Benelux"],"disciplines":[],"hiringIn":["UK & Ireland","Remote"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Twilio","x":"https://x.com/search?q=Twilio&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Twilio","dribbble":"https://dribbble.com/search/Twilio"}},{"name":"GitLab","group":"Global big tech","hq":"Remote","sector":"Developer tools","site":"https://about.gitlab.com","careers":"https://about.gitlab.com/jobs/","board":"https://boards.greenhouse.io/gitlab","designRoles":1,"designTitles":["AI Transformation Owner, Product & Design"],"disciplines":[],"hiringIn":["UK & Ireland","North America","Remote"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=GitLab","x":"https://x.com/search?q=GitLab&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=GitLab","dribbble":"https://dribbble.com/search/GitLab"}},{"name":"Perplexity","group":"Global big tech","hq":"San Francisco, US","sector":"AI","site":"https://www.perplexity.ai","careers":"https://www.perplexity.ai/careers","board":"https://jobs.ashbyhq.com/perplexity","designRoles":10,"designTitles":["Member of Technical Staff (Software Engineer, Design System)","Senior Cinematographer, Brand Studio","Motion Designer","Creative Operations Manager"],"disciplines":["product","uiux","graphic"],"hiringIn":["North America"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Perplexity","x":"https://x.com/search?q=Perplexity&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Perplexity","dribbble":"https://dribbble.com/search/Perplexity"}},{"name":"ElevenLabs","group":"Global big tech","hq":"London / New York","sector":"AI audio","site":"https://elevenlabs.io","careers":"https://elevenlabs.io/careers","board":"https://jobs.ashbyhq.com/elevenlabs","designRoles":12,"designTitles":["AI Creative Producer","Product Designer","Forward Deployed Creative","Account Executive - ElevenCreative - Germany"],"disciplines":["product","graphic"],"hiringIn":["UK & Ireland","Europe","North America"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=ElevenLabs","x":"https://x.com/search?q=ElevenLabs&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=ElevenLabs","dribbble":"https://dribbble.com/search/ElevenLabs"}},{"name":"Ramp","group":"Global big tech","hq":"New York, US","sector":"Fintech","site":"https://ramp.com","careers":"https://ramp.com/careers","board":"https://jobs.ashbyhq.com/ramp","designRoles":5,"designTitles":["Product Designer","Senior Brand Designer, Growth","Lead Recruiter | Design","Design Engineer"],"disciplines":["product","graphic"],"hiringIn":["North America"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Ramp","x":"https://x.com/search?q=Ramp&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Ramp","dribbble":"https://dribbble.com/search/Ramp"}},{"name":"Replit","group":"Global big tech","hq":"Foster City, US","sector":"Developer tools","site":"https://replit.com","careers":"https://replit.com/careers","board":"https://jobs.ashbyhq.com/replit","designRoles":4,"designTitles":["Design Engineer","Brand Designer","Engineering Manager, UX ","Director of Product Design"],"disciplines":["product","uiux","graphic"],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Replit","x":"https://x.com/search?q=Replit&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Replit","dribbble":"https://dribbble.com/search/Replit"}},{"name":"Cursor","group":"Global big tech","hq":"San Francisco, US","sector":"Developer tools","site":"https://cursor.com","careers":"","board":"https://jobs.ashbyhq.com/cursor","designRoles":1,"designTitles":["Design Engineer"],"disciplines":[],"hiringIn":["North America"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Cursor","x":"https://x.com/search?q=Cursor&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Cursor","dribbble":"https://dribbble.com/search/Cursor"}},{"name":"Vanta","group":"Global big tech","hq":"San Francisco, US","sector":"Security compliance","site":"https://www.vanta.com","careers":"https://www.vanta.com/careers","board":"https://jobs.ashbyhq.com/vanta","designRoles":6,"designTitles":["Head of Design","Staff Product Designer, Design Systems","Senior Systems Designer, EPD","Director of Product Design"],"disciplines":["product","uiux"],"hiringIn":["Remote"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Vanta","x":"https://x.com/search?q=Vanta&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Vanta","dribbble":"https://dribbble.com/search/Vanta"}},{"name":"Harvey","group":"Global big tech","hq":"San Francisco, US","sector":"Legal AI","site":"https://www.harvey.ai","careers":"https://www.harvey.ai/careers","board":"https://jobs.ashbyhq.com/harvey","designRoles":16,"designTitles":["Staff Product Designer","Staff Product Designer","Senior or Staff Product Designer, Design Systems","Senior or Staff Product Designer, Design Systems"],"disciplines":["product","uiux","graphic"],"hiringIn":["North America"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Harvey","x":"https://x.com/search?q=Harvey&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Harvey","dribbble":"https://dribbble.com/search/Harvey"}},{"name":"Sierra","group":"Global big tech","hq":"San Francisco, US","sector":"AI","site":"https://sierra.ai","careers":"https://sierra.ai/careers","board":"https://jobs.ashbyhq.com/sierra","designRoles":6,"designTitles":["Product Designer","Agent Experience Designer, Voice (Multilingual)","AI Voice Designer","Motion Designer"],"disciplines":["product","uiux","graphic"],"hiringIn":["UK & Ireland","Asia-Pacific","North America"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Sierra","x":"https://x.com/search?q=Sierra&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Sierra","dribbble":"https://dribbble.com/search/Sierra"}},{"name":"Walmart","group":"US Fortune 500","hq":"Bentonville, US","sector":"Retail","site":"https://corporate.walmart.com","careers":"https://careers.walmart.com/results","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Walmart","x":"https://x.com/search?q=Walmart&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Walmart","dribbble":"https://dribbble.com/search/Walmart"}},{"name":"Disney","group":"US Fortune 500","hq":"Burbank, US","sector":"Media & entertainment","site":"https://thewaltdisneycompany.com","careers":"https://jobs.disneycareers.com/","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Disney","x":"https://x.com/search?q=Disney&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Disney","dribbble":"https://dribbble.com/search/Disney"}},{"name":"Nike","group":"US Fortune 500","hq":"Beaverton, US","sector":"Apparel","site":"https://www.nike.com","careers":"https://careers.nike.com/","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Nike","x":"https://x.com/search?q=Nike&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Nike","dribbble":"https://dribbble.com/search/Nike"}},{"name":"JPMorgan Chase","group":"US Fortune 500","hq":"New York, US","sector":"Banking","site":"https://www.jpmorganchase.com","careers":"https://careers.jpmorgan.com/global/en/home","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=JPMorgan%20Chase","x":"https://x.com/search?q=JPMorgan%20Chase&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=JPMorgan%20Chase","dribbble":"https://dribbble.com/search/JPMorgan%20Chase"}},{"name":"Goldman Sachs","group":"US Fortune 500","hq":"New York, US","sector":"Investment banking","site":"https://www.goldmansachs.com","careers":"https://www.goldmansachs.com/careers","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Goldman%20Sachs","x":"https://x.com/search?q=Goldman%20Sachs&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Goldman%20Sachs","dribbble":"https://dribbble.com/search/Goldman%20Sachs"}},{"name":"Visa","group":"US Fortune 500","hq":"San Francisco, US","sector":"Payments","site":"https://usa.visa.com","careers":"https://corporate.visa.com/en/jobs/","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Visa","x":"https://x.com/search?q=Visa&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Visa","dribbble":"https://dribbble.com/search/Visa"}},{"name":"Mastercard","group":"US Fortune 500","hq":"Purchase, US","sector":"Payments","site":"https://www.mastercard.com","careers":"https://careers.mastercard.com/us/en/home","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Mastercard","x":"https://x.com/search?q=Mastercard&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Mastercard","dribbble":"https://dribbble.com/search/Mastercard"}},{"name":"Dell","group":"US Fortune 500","hq":"Round Rock, US","sector":"Hardware","site":"https://www.dell.com","careers":"https://jobs.dell.com/","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Dell","x":"https://x.com/search?q=Dell&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Dell","dribbble":"https://dribbble.com/search/Dell"}},{"name":"Qualcomm","group":"US Fortune 500","hq":"San Diego, US","sector":"Semiconductors","site":"https://www.qualcomm.com","careers":"https://careers.qualcomm.com/careers/home","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Qualcomm","x":"https://x.com/search?q=Qualcomm&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Qualcomm","dribbble":"https://dribbble.com/search/Qualcomm"}},{"name":"Bloomberg","group":"US Fortune 500","hq":"New York, US","sector":"Financial data & media","site":"https://www.bloomberg.com","careers":"https://careers.bloomberg.com/job/search","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Bloomberg","x":"https://x.com/search?q=Bloomberg&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Bloomberg","dribbble":"https://dribbble.com/search/Bloomberg"}},{"name":"Peloton","group":"US Fortune 500","hq":"New York, US","sector":"Connected fitness","site":"https://www.onepeloton.com","careers":"https://www.onepeloton.com/careers","board":"https://boards.greenhouse.io/peloton","designRoles":4,"designTitles":["Manager, Data Analytics, Performance Creative","Principal Industrial Designer","Sr. Learning Experience Designer, Global LXD Studio","Sr. Product Designer"],"disciplines":["product","uiux","graphic"],"hiringIn":["Europe","North America"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Peloton","x":"https://x.com/search?q=Peloton&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Peloton","dribbble":"https://dribbble.com/search/Peloton"}},{"name":"Robinhood","group":"US Fortune 500","hq":"Menlo Park, US","sector":"Fintech","site":"https://robinhood.com","careers":"https://careers.robinhood.com/","board":"https://boards.greenhouse.io/robinhood","designRoles":5,"designTitles":["Senior Product Designer","Senior Product Designer, DeFi","Senior Product Designer, Redesign","Senior Product Designer, Trading"],"disciplines":["product"],"hiringIn":["North America"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Robinhood","x":"https://x.com/search?q=Robinhood&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Robinhood","dribbble":"https://dribbble.com/search/Robinhood"}},{"name":"Affirm","group":"US Fortune 500","hq":"San Francisco, US","sector":"Fintech","site":"https://www.affirm.com","careers":"https://www.affirm.com/careers","board":"https://boards.greenhouse.io/affirm","designRoles":2,"designTitles":["Senior Software Engineer, Mobile (Repayment UX)","Senior Software Engineer, Mobile (Repayment UX)"],"disciplines":["uiux"],"hiringIn":["Europe","Remote"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Affirm","x":"https://x.com/search?q=Affirm&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Affirm","dribbble":"https://dribbble.com/search/Affirm"}},{"name":"Instacart","group":"US Fortune 500","hq":"San Francisco, US","sector":"Grocery delivery","site":"https://www.instacart.com","careers":"https://instacart.careers/","board":"https://boards.greenhouse.io/instacart","designRoles":6,"designTitles":["Senior Product Designer II - Lifecycle & Growth","Senior Product Designer II - Lifecycle & Growth","Senior Product Designer II - Order Quality","Senior Product Designer II - Order Quality"],"disciplines":["product","uiux"],"hiringIn":["North America","Remote"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Instacart","x":"https://x.com/search?q=Instacart&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Instacart","dribbble":"https://dribbble.com/search/Instacart"}},{"name":"Gusto","group":"US Fortune 500","hq":"San Francisco, US","sector":"HR & payroll","site":"https://gusto.com","careers":"https://gusto.com/about/careers","board":"https://boards.greenhouse.io/gusto","designRoles":9,"designTitles":["Design Systems, Staff Product Designer","People Partner - Product and Product Design","Senior Product Design Manager, Banking","Senior Product Design Manager, Payroll"],"disciplines":["product","uiux","graphic"],"hiringIn":["North America"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Gusto","x":"https://x.com/search?q=Gusto&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Gusto","dribbble":"https://dribbble.com/search/Gusto"}},{"name":"Brex","group":"US Fortune 500","hq":"New York, US","sector":"Fintech","site":"https://www.brex.com","careers":"https://www.brex.com/careers","board":"https://boards.greenhouse.io/brex","designRoles":10,"designTitles":["Senior Brand Designer","Senior Brand Designer","Staff Brand Designer","Staff Brand Designer"],"disciplines":["product","graphic"],"hiringIn":["North America"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Brex","x":"https://x.com/search?q=Brex&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Brex","dribbble":"https://dribbble.com/search/Brex"}},{"name":"Chime","group":"US Fortune 500","hq":"San Francisco, US","sector":"Fintech","site":"https://www.chime.com","careers":"https://careers.chime.com/","board":"https://boards.greenhouse.io/chime","designRoles":6,"designTitles":["Associate Creative Director, Growth Marketing","Creative Director, Brand","Design Director","Principal Product Designer, Lending"],"disciplines":["product","uiux","graphic"],"hiringIn":["North America"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Chime","x":"https://x.com/search?q=Chime&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Chime","dribbble":"https://dribbble.com/search/Chime"}},{"name":"Samsara","group":"US Fortune 500","hq":"San Francisco, US","sector":"IoT","site":"https://www.samsara.com","careers":"https://www.samsara.com/company/careers","board":"https://boards.greenhouse.io/samsara","designRoles":5,"designTitles":["AI Learning Experience Designer (AI-LXD)","Director, Product Design","Lead Product Designer","Lead Product Designer"],"disciplines":["product","uiux"],"hiringIn":["North America","Remote"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Samsara","x":"https://x.com/search?q=Samsara&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Samsara","dribbble":"https://dribbble.com/search/Samsara"}},{"name":"Coursera","group":"US Fortune 500","hq":"Mountain View, US","sector":"Education","site":"https://www.coursera.org","careers":"https://about.coursera.org/careers","board":"https://boards.greenhouse.io/coursera","designRoles":1,"designTitles":["Senior Product Designer"],"disciplines":["product"],"hiringIn":["North America"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Coursera","x":"https://x.com/search?q=Coursera&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Coursera","dribbble":"https://dribbble.com/search/Coursera"}},{"name":"Monzo","group":"UK & Ireland","hq":"London, UK","sector":"Digital banking","site":"https://monzo.com","careers":"https://monzo.com/careers/","board":"https://boards.greenhouse.io/monzo","designRoles":6,"designTitles":["Director of Product Design","Lead Product Designer","Lead Product Designer, Growth","Senior Brand Designer, Fixed Term Contract "],"disciplines":["product","graphic"],"hiringIn":["UK & Ireland","Remote"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Monzo","x":"https://x.com/search?q=Monzo&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Monzo","dribbble":"https://dribbble.com/search/Monzo"}},{"name":"Wise","group":"UK & Ireland","hq":"London, UK","sector":"Fintech","site":"https://wise.com","careers":"https://www.wise.jobs/","board":"https://boards.greenhouse.io/wise","designRoles":0,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Wise","x":"https://x.com/search?q=Wise&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Wise","dribbble":"https://dribbble.com/search/Wise"}},{"name":"Tide","group":"UK & Ireland","hq":"London, UK","sector":"Business banking","site":"https://www.tide.co","careers":"https://www.tide.co/careers/","board":"https://boards.greenhouse.io/tide","designRoles":3,"designTitles":["Senior Product Designer","Senior Product Designer","Senior Product Designer"],"disciplines":["product"],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Tide","x":"https://x.com/search?q=Tide&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Tide","dribbble":"https://dribbble.com/search/Tide"}},{"name":"GoCardless","group":"UK & Ireland","hq":"London, UK","sector":"Payments","site":"https://gocardless.com","careers":"https://gocardless.com/careers/","board":"https://boards.greenhouse.io/gocardless","designRoles":0,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=GoCardless","x":"https://x.com/search?q=GoCardless&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=GoCardless","dribbble":"https://dribbble.com/search/GoCardless"}},{"name":"Intercom","group":"UK & Ireland","hq":"Dublin, Ireland","sector":"Customer messaging","site":"https://www.intercom.com","careers":"https://www.intercom.com/careers","board":"https://boards.greenhouse.io/intercom","designRoles":4,"designTitles":["Senior Product Designer","Senior Product Designer","Staff/Principal Product Designer","Staff/Principal Product Designer"],"disciplines":["product"],"hiringIn":["UK & Ireland","Europe"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Intercom","x":"https://x.com/search?q=Intercom&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Intercom","dribbble":"https://dribbble.com/search/Intercom"}},{"name":"Deliveroo","group":"UK & Ireland","hq":"London, UK","sector":"Food delivery","site":"https://deliveroo.co.uk","careers":"https://careers.deliveroo.co.uk/","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Deliveroo","x":"https://x.com/search?q=Deliveroo&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Deliveroo","dribbble":"https://dribbble.com/search/Deliveroo"}},{"name":"Arm","group":"UK & Ireland","hq":"Cambridge, UK","sector":"Semiconductors","site":"https://www.arm.com","careers":"https://careers.arm.com/search-jobs","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Arm","x":"https://x.com/search?q=Arm&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Arm","dribbble":"https://dribbble.com/search/Arm"}},{"name":"BBC","group":"UK & Ireland","hq":"London, UK","sector":"Broadcasting","site":"https://www.bbc.co.uk","careers":"https://careers.bbc.co.uk/search/","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=BBC","x":"https://x.com/search?q=BBC&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=BBC","dribbble":"https://dribbble.com/search/BBC"}},{"name":"Synthesia","group":"UK & Ireland","hq":"London, UK","sector":"AI video","site":"https://www.synthesia.io","careers":"https://www.synthesia.io/careers","board":"https://jobs.ashbyhq.com/synthesia","designRoles":5,"designTitles":["Senior Brand Designer, Experiential","Senior Brand Designer, Experiential","Solutions Manager, Creative Design "," Senior Instructional Designer"],"disciplines":["product","graphic"],"hiringIn":["UK & Ireland","North America","Remote"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Synthesia","x":"https://x.com/search?q=Synthesia&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Synthesia","dribbble":"https://dribbble.com/search/Synthesia"}},{"name":"Spotify","group":"Europe","hq":"Stockholm, Sweden","sector":"Streaming","site":"https://www.spotify.com","careers":"https://www.lifeatspotify.com/jobs","board":"https://jobs.lever.co/spotify","designRoles":2,"designTitles":["Senior Digital Learning Experience Designer - Learning & Inclusion","Senior Digital Learning Experience Designer, Learning & Inclusion"],"disciplines":["uiux"],"hiringIn":["UK & Ireland","North America"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Spotify","x":"https://x.com/search?q=Spotify&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Spotify","dribbble":"https://dribbble.com/search/Spotify"}},{"name":"Adyen","group":"Europe","hq":"Amsterdam, Netherlands","sector":"Payments","site":"https://www.adyen.com","careers":"https://careers.adyen.com/","board":"https://boards.greenhouse.io/adyen","designRoles":1,"designTitles":["Manager, Product Experience Design"],"disciplines":["uiux"],"hiringIn":["North America"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Adyen","x":"https://x.com/search?q=Adyen&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Adyen","dribbble":"https://dribbble.com/search/Adyen"}},{"name":"N26","group":"Europe","hq":"Berlin, Germany","sector":"Digital banking","site":"https://n26.com","careers":"https://n26.com/en/careers","board":"https://boards.greenhouse.io/n26","designRoles":0,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=N26","x":"https://x.com/search?q=N26&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=N26","dribbble":"https://dribbble.com/search/N26"}},{"name":"Doctolib","group":"Europe","hq":"Paris, France","sector":"Health tech","site":"https://www.doctolib.fr","careers":"https://careers.doctolib.com/","board":"https://boards.greenhouse.io/doctolib","designRoles":2,"designTitles":["Head of Design System (x/f/m)","Senior Software Engineer (Frontend) - Design System & Mobile (x/f/m) - Paris or Nantes"],"disciplines":["uiux"],"hiringIn":["Europe"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Doctolib","x":"https://x.com/search?q=Doctolib&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Doctolib","dribbble":"https://dribbble.com/search/Doctolib"}},{"name":"Typeform","group":"Europe","hq":"Barcelona, Spain","sector":"SaaS","site":"https://www.typeform.com","careers":"https://www.typeform.com/careers/","board":"https://boards.greenhouse.io/typeform","designRoles":0,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Typeform","x":"https://x.com/search?q=Typeform&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Typeform","dribbble":"https://dribbble.com/search/Typeform"}},{"name":"BlaBlaCar","group":"Europe","hq":"Paris, France","sector":"Mobility","site":"https://www.blablacar.com","careers":"","board":"https://jobs.lever.co/blablacar","designRoles":1,"designTitles":["Stagiaire Marketing & Réseaux Sociaux France"],"disciplines":[],"hiringIn":["Europe"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=BlaBlaCar","x":"https://x.com/search?q=BlaBlaCar&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=BlaBlaCar","dribbble":"https://dribbble.com/search/BlaBlaCar"}},{"name":"n8n","group":"Europe","hq":"Berlin, Germany","sector":"Automation","site":"https://n8n.io","careers":"https://n8n.io/careers/","board":"https://jobs.ashbyhq.com/n8n","designRoles":3,"designTitles":[" Design Talent Pool","Senior/Staff Product Designer","Head of Product Design"],"disciplines":["product"],"hiringIn":["Europe"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=n8n","x":"https://x.com/search?q=n8n&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=n8n","dribbble":"https://dribbble.com/search/n8n"}},{"name":"Lovable","group":"Europe","hq":"Stockholm, Sweden","sector":"AI developer tools","site":"https://lovable.dev","careers":"https://lovable.dev/careers","board":"https://jobs.ashbyhq.com/lovable","designRoles":9,"designTitles":["Product Designer","Brand Designer, Web","Staff / Principal Design Engineer, Web","Staff / Principal Product Designer"],"disciplines":["product","graphic"],"hiringIn":["UK & Ireland","Europe"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Lovable","x":"https://x.com/search?q=Lovable&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Lovable","dribbble":"https://dribbble.com/search/Lovable"}},{"name":"SAP","group":"Europe","hq":"Walldorf, Germany","sector":"Enterprise software","site":"https://www.sap.com","careers":"https://jobs.sap.com/search/","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=SAP","x":"https://x.com/search?q=SAP&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=SAP","dribbble":"https://dribbble.com/search/SAP"}},{"name":"Booking.com","group":"Europe","hq":"Amsterdam, Netherlands","sector":"Travel","site":"https://www.booking.com","careers":"https://careers.booking.com/","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Booking.com","x":"https://x.com/search?q=Booking.com&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Booking.com","dribbble":"https://dribbble.com/search/Booking.com"}},{"name":"Zalando","group":"Europe","hq":"Berlin, Germany","sector":"E-commerce fashion","site":"https://www.zalando.com","careers":"https://jobs.zalando.com/en/jobs/","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Zalando","x":"https://x.com/search?q=Zalando&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Zalando","dribbble":"https://dribbble.com/search/Zalando"}},{"name":"Siemens","group":"Europe","hq":"Munich, Germany","sector":"Industrial","site":"https://www.siemens.com","careers":"https://jobs.siemens.com/careers","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Siemens","x":"https://x.com/search?q=Siemens&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Siemens","dribbble":"https://dribbble.com/search/Siemens"}},{"name":"ASML","group":"Europe","hq":"Veldhoven, Netherlands","sector":"Semiconductor equipment","site":"https://www.asml.com","careers":"","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=ASML","x":"https://x.com/search?q=ASML&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=ASML","dribbble":"https://dribbble.com/search/ASML"}},{"name":"Klarna","group":"Europe","hq":"Stockholm, Sweden","sector":"Fintech","site":"https://www.klarna.com","careers":"https://www.klarna.com/careers/","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Klarna","x":"https://x.com/search?q=Klarna&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Klarna","dribbble":"https://dribbble.com/search/Klarna"}},{"name":"Revolut","group":"Europe","hq":"London, UK","sector":"Fintech","site":"https://www.revolut.com","careers":"https://www.revolut.com/careers/","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Revolut","x":"https://x.com/search?q=Revolut&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Revolut","dribbble":"https://dribbble.com/search/Revolut"}},{"name":"Coupang","group":"Asia-Pacific","hq":"Seoul, South Korea","sector":"E-commerce","site":"https://www.aboutcoupang.com","careers":"https://www.coupang.jobs/en/","board":"https://boards.greenhouse.io/coupang","designRoles":12,"designTitles":["[CLS] Senior Automation Design (Logistics Process)","[Coupang Fulfillment Services] Principal, Facility Automation Designer","[Coupang Pay] Staff Product Designer (FinTech UX)","Designer "],"disciplines":["product","uiux","graphic"],"hiringIn":["Asia-Pacific"],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Coupang","x":"https://x.com/search?q=Coupang&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Coupang","dribbble":"https://dribbble.com/search/Coupang"}},{"name":"Mercari","group":"Asia-Pacific","hq":"Tokyo, Japan","sector":"Marketplace","site":"https://about.mercari.com","careers":"https://careers.mercari.com/","board":"https://boards.greenhouse.io/mercari","designRoles":0,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Mercari","x":"https://x.com/search?q=Mercari&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Mercari","dribbble":"https://dribbble.com/search/Mercari"}},{"name":"Canva","group":"Asia-Pacific","hq":"Sydney, Australia","sector":"Design tools","site":"https://www.canva.com","careers":"https://www.lifeatcanva.com/en/jobs/","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Canva","x":"https://x.com/search?q=Canva&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Canva","dribbble":"https://dribbble.com/search/Canva"}},{"name":"Atlassian","group":"Asia-Pacific","hq":"Sydney, Australia","sector":"Developer tools","site":"https://www.atlassian.com","careers":"https://www.atlassian.com/company/careers/all-jobs","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Atlassian","x":"https://x.com/search?q=Atlassian&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Atlassian","dribbble":"https://dribbble.com/search/Atlassian"}},{"name":"TikTok","group":"Asia-Pacific","hq":"Singapore","sector":"Social","site":"https://www.tiktok.com","careers":"https://lifeattiktok.com/search","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=TikTok","x":"https://x.com/search?q=TikTok&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=TikTok","dribbble":"https://dribbble.com/search/TikTok"}},{"name":"Samsung","group":"Asia-Pacific","hq":"Suwon, South Korea","sector":"Consumer electronics","site":"https://www.samsung.com","careers":"https://www.samsung.com/us/careers/","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Samsung","x":"https://x.com/search?q=Samsung&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Samsung","dribbble":"https://dribbble.com/search/Samsung"}},{"name":"Grab","group":"Asia-Pacific","hq":"Singapore","sector":"Super app","site":"https://www.grab.com","careers":"https://www.grab.careers/en/","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Grab","x":"https://x.com/search?q=Grab&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Grab","dribbble":"https://dribbble.com/search/Grab"}},{"name":"Rakuten","group":"Asia-Pacific","hq":"Tokyo, Japan","sector":"E-commerce","site":"https://global.rakuten.com","careers":"","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Rakuten","x":"https://x.com/search?q=Rakuten&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Rakuten","dribbble":"https://dribbble.com/search/Rakuten"}},{"name":"Infosys","group":"Asia-Pacific","hq":"Bengaluru, India","sector":"IT services","site":"https://www.infosys.com","careers":"https://www.infosys.com/careers/","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Infosys","x":"https://x.com/search?q=Infosys&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Infosys","dribbble":"https://dribbble.com/search/Infosys"}},{"name":"Tata Consultancy Services","group":"Asia-Pacific","hq":"Mumbai, India","sector":"IT services","site":"https://www.tcs.com","careers":"https://www.tcs.com/careers","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Tata%20Consultancy%20Services","x":"https://x.com/search?q=Tata%20Consultancy%20Services&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Tata%20Consultancy%20Services","dribbble":"https://dribbble.com/search/Tata%20Consultancy%20Services"}},{"name":"Freshworks","group":"Asia-Pacific","hq":"Chennai, India","sector":"SaaS","site":"https://www.freshworks.com","careers":"https://www.freshworks.com/company/careers/","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Freshworks","x":"https://x.com/search?q=Freshworks&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Freshworks","dribbble":"https://dribbble.com/search/Freshworks"}},{"name":"Zoho","group":"Asia-Pacific","hq":"Chennai, India","sector":"SaaS","site":"https://www.zoho.com","careers":"https://www.zoho.com/careers/","board":null,"designRoles":null,"designTitles":[],"disciplines":[],"hiringIn":[],"social":{"linkedin":"https://www.linkedin.com/search/results/companies/?keywords=Zoho","x":"https://x.com/search?q=Zoho&f=user","instagram":"https://www.instagram.com/explore/search/keyword/?q=Zoho","dribbble":"https://dribbble.com/search/Zoho"}}]}/*__DIRECTORY_END__*/;
+
+  var DISC = {product:"Product design", uiux:"UI/UX", graphic:"Graphic & brand"};
+  var WHERE = ["UK & Ireland", "Europe", "Asia-Pacific", "North America", "Remote"];
+  var coF = {group:"all", disc:"all", where:"all", q:""};
+
+  function chips(el, opts, key){
+    el.innerHTML = opts.map(function(o){
+      return '<button class="stage" type="button" data-k="' + key + '" data-v="' + esc(o.v) + '"' +
+        ' aria-pressed="' + (coF[key] === o.v) + '">' + esc(o.label) +
+        (o.n != null ? ' <span class="n">' + o.n + "</span>" : "") + "</button>";
+    }).join("");
+  }
+
+  function coMatches(c){
+    if(coF.group !== "all" && c.group !== coF.group) return false;
+    if(coF.disc !== "all" && (c.disciplines || []).indexOf(coF.disc) < 0) return false;
+    if(coF.where !== "all" && (c.hiringIn || []).indexOf(coF.where) < 0) return false;
+    var q = coF.q.trim().toLowerCase();
+    if(q && [c.name, c.sector, c.hq, c.group].join(" ").toLowerCase().indexOf(q) < 0) return false;
+    return true;
+  }
+
+  function renderCompanies(){
+    var all = DIRECTORY.companies || [];
+    var hiring = all.filter(function(c){ return c.designRoles > 0; }).length;
+    var when = DIRECTORY.verifiedAt ? new Date(DIRECTORY.verifiedAt) : null;
+    $("#co-sub").textContent =
+      all.length + " companies · " + hiring + " with design roles open" +
+      (when && !isNaN(when) ? " · checked " + when.toLocaleDateString(undefined,{day:"numeric",month:"short"}) : "");
+
+    chips($("#co-rail-group"), [{v:"all", label:"All regions", n:all.length}].concat(
+      (DIRECTORY.groups || []).map(function(g){
+        return {v:g, label:g, n:all.filter(function(c){ return c.group === g; }).length};
+      })
+    ), "group");
+
+    chips($("#co-rail-disc"), [{v:"all", label:"Any discipline"}].concat(
+      Object.keys(DISC).map(function(k){
+        return {v:k, label:DISC[k], n:all.filter(function(c){ return (c.disciplines||[]).indexOf(k) > -1; }).length};
+      })
+    ), "disc");
+
+    chips($("#co-rail-where"), [{v:"all", label:"Anywhere"}].concat(
+      WHERE.map(function(w){
+        return {v:w, label:w, n:all.filter(function(c){ return (c.hiringIn||[]).indexOf(w) > -1; }).length};
+      })
+    ), "where");
+
+    var rows = all.filter(coMatches).sort(function(a,b){
+      return (b.designRoles || 0) - (a.designRoles || 0) || a.name.localeCompare(b.name);
+    });
+
+    var tracked = {};
+    items.forEach(function(it){ tracked[String(it.company||"").toLowerCase().trim()] = true; });
+
+    if(!rows.length){
+      $("#co-body").innerHTML = '<p class="co-note">No company matches those filters. A company with no public job board cannot be filtered by discipline — clear that filter to see it.</p>';
+    } else {
+      $("#co-body").innerHTML = '<p class="co-count">' + rows.length + " compan" + (rows.length === 1 ? "y" : "ies") + '</p><div class="co-list">' +
+        rows.map(function(c){ return coCard(c, tracked); }).join("") + "</div>";
+    }
+
+    $("#co-note").innerHTML =
+      "Design-role counts and locations are read live from each company’s own job board, so they are facts, not guesses — " +
+      "but a company that runs its own careers site has no readable board and shows none. " +
+      "Social links are <b>searches</b>, not saved profile URLs: a guessed profile link is wrong often enough to be worse than a search that always lands you in the right place.";
+  }
+
+  function coCard(c, tracked){
+    var isTracked = !!tracked[c.name.toLowerCase().trim()];
+    var badge = c.designRoles > 0
+      ? '<span class="co-badge">' + c.designRoles + " design open</span>"
+      : '<span class="co-badge none">' + (c.board ? "none open" : "no public board") + "</span>";
+
+    var tags = (c.disciplines || []).map(function(k){ return '<span class="tag">' + esc(DISC[k] || k) + "</span>"; })
+      .concat((c.hiringIn || []).map(function(w){ return '<span class="tag">' + esc(w) + "</span>"; }));
+
+    var titles = (c.designTitles || []).length
+      ? '<p class="co-titles"><b>Open now:</b> ' + c.designTitles.map(esc).join(" · ") + "</p>"
+      : "";
+
+    var L = [];
+    var link = function(href, label, dim){
+      return '<a href="' + esc(href) + '" target="_blank" rel="noopener noreferrer"' + (dim ? ' class="dim"' : "") + ">" + esc(label) + "</a>";
+    };
+    if(c.careers) L.push(link(c.careers, "Careers"));
+    if(c.board) L.push(link(c.board, "Job board"));
+    if(c.site) L.push(link(c.site, "Website", true));
+    var s = c.social || {};
+    if(s.linkedin) L.push(link(s.linkedin, "LinkedIn", true));
+    if(s.x) L.push(link(s.x, "X", true));
+    if(s.instagram) L.push(link(s.instagram, "Instagram", true));
+    if(s.dribbble) L.push(link(s.dribbble, "Dribbble", true));
+
+    return '<article class="co">' +
+      '<div class="co-head"><div><h3 class="co-name">' + esc(c.name) + "</h3>" +
+        '<p class="co-meta">' + esc([c.sector, c.hq].filter(Boolean).join(" · ")) + "</p></div>" + badge + "</div>" +
+      (tags.length ? '<div class="co-tags">' + tags.join("") + "</div>" : "") +
+      titles +
+      '<div class="co-links">' + L.join("") + '<span class="spacer"></span>' +
+        '<button type="button" data-track="' + esc(c.name) + '"' + (isTracked ? " disabled" : "") + ">" +
+        (isTracked ? "In pipeline" : "Track") + "</button></div>" +
+    "</article>";
+  }
+
+  $("#btn-companies").addEventListener("click", function(){
+    if(!(DIRECTORY.companies || []).length){
+      toast("The company list has not been built yet — run the directory script.");
+      return;
+    }
+    renderCompanies();
+    openSheet("#sheet-co");
+  });
+
+  $("#co-q").addEventListener("input", function(e){ coF.q = e.target.value; renderCompanies(); });
+
+  $("#sheet-co").addEventListener("click", async function(e){
+    var chip = e.target.closest("[data-k]");
+    if(chip){
+      coF[chip.getAttribute("data-k")] = chip.getAttribute("data-v");
+      renderCompanies();
+      return;
+    }
+    var t = e.target.closest("[data-track]");
+    if(!t) return;
+    var name = t.getAttribute("data-track");
+    var c = (DIRECTORY.companies || []).filter(function(x){ return x.name === name; })[0];
+    if(!c) return;
+    t.disabled = true;
+    var d = blank();
+    d.company = c.name;
+    d.role = c.designRoles > 0 && c.designTitles.length ? c.designTitles[0] : "Product Designer";
+    d.location = c.hq || "";
+    d.link = c.careers || c.board || c.site || "";
+    d.source = "Company directory";
+    d.notes = [
+      c.sector ? c.sector + (c.hq ? " · " + c.hq : "") : "",
+      c.designRoles > 0 ? c.designRoles + " design role(s) open when last checked" : "",
+      (c.hiringIn || []).length ? "Hiring in: " + c.hiringIn.join(", ") : "",
+      c.board ? "Board: " + c.board : ""
+    ].filter(Boolean).join("\n");
+    try{
+      await createItem(d);
+      t.textContent = "In pipeline";
+      toast(c.name + " added to your pipeline.");
+    }catch(err){
+      t.disabled = false;
+      toast("Could not add that. Try again.");
+    }
+  });
+
+  /* ---------- offline parser ---------- */
+  function localParse(text){
+    var out = {role:"",company:"",location:"",workMode:"",type:"",salary:"",deadline:"",link:"",source:"",contact:"",notes:""};
+    var lines = text.split(/\r?\n/).map(function(l){ return l.trim(); }).filter(Boolean);
+
+    var labels = {
+      role:/^(role|position|job ?title|title)\s*[:\-]\s*(.+)$/i,
+      company:/^(company|employer|organisation|organization)\s*[:\-]\s*(.+)$/i,
+      location:/^(location|based in|city)\s*[:\-]\s*(.+)$/i,
+      salary:/^(salary|stipend|pay|compensation|remuneration)\s*[:\-]\s*(.+)$/i,
+      deadline:/^(deadline|closing date|apply by|closes)\s*[:\-]\s*(.+)$/i,
+      source:/^(source|found (?:on|via)|posted on)\s*[:\-]\s*(.+)$/i,
+      contact:/^(contact|recruiter|email)\s*[:\-]\s*(.+)$/i
+    };
+    lines.forEach(function(l){
+      Object.keys(labels).forEach(function(k){
+        var m = l.match(labels[k]);
+        if(m && !out[k]) out[k] = m[2].trim();
+      });
+    });
+
+    var url = text.match(/https?:\/\/[^\s<>"')]+/);
+    if(url) out.link = url[0];
+    var mail = text.match(/[\w.+-]+@[\w-]+\.[\w.]{2,}/);
+    if(mail && !out.contact) out.contact = mail[0];
+
+    if(/\bremote\b/i.test(text)) out.workMode = "Remote";
+    if(/\bhybrid\b/i.test(text)) out.workMode = "Hybrid";
+    if(/\b(on[- ]?site|in[- ]?office|onsite)\b/i.test(text)) out.workMode = "On-site";
+
+    if(/\bintern(ship)?\b/i.test(text)) out.type = "Internship";
+    else if(/\bgraduate (scheme|programme|program|trainee)\b/i.test(text)) out.type = "Graduate scheme";
+    else if(/\bpart[- ]time\b/i.test(text)) out.type = "Part-time";
+    else if(/\bcontract(or)?\b/i.test(text)) out.type = "Contract";
+    else if(/\bfull[- ]time\b/i.test(text)) out.type = "Full-time";
+
+    if(!out.salary){
+      var pay = text.match(/(?:[₦$£€]|NGN|USD|GBP|EUR)\s?[\d,.]+(?:\s?[-–]\s?(?:[₦$£€]|NGN|USD|GBP|EUR)?\s?[\d,.]+)?(?:\s?(?:per|\/)\s?(?:month|year|annum|hour|week))?/i);
+      if(pay) out.salary = pay[0].trim();
+    }
+    if(!out.deadline) out.deadline = findDate(text);
+    else out.deadline = normalizeDate(out.deadline) || "";
+
+    if(!out.role){
+      var roleLine = lines.filter(function(l){
+        return l.length < 90 && /\b(intern|engineer|developer|analyst|designer|manager|scientist|associate|assistant|officer|consultant|trainee|marketer|writer)\b/i.test(l);
+      })[0];
+      if(roleLine) out.role = roleLine.replace(/\s*[–\-|@]\s*.*$/, "").trim();
+      else if(lines[0] && lines[0].length < 90) out.role = lines[0];
+    }
+    if(!out.company){
+      var at = text.match(/\bat\s+([A-Z][\w&.'-]*(?:\s+[A-Z][\w&.'-]*){0,3})/);
+      if(at) out.company = at[1].trim();
+      else if(lines[1] && lines[1].length < 60) out.company = lines[1].split(/\s*[–\-|,]\s*/)[0].trim();
+    }
+    if(/linkedin/i.test(text) && !out.source) out.source = "LinkedIn";
+    return out;
+  }
+
+  var MONTHS = ["january","february","march","april","may","june","july","august","september","october","november","december"];
+  function normalizeDate(str){
+    if(!str) return "";
+    var s = String(str).trim();
+    var iso = s.match(/(\d{4})-(\d{2})-(\d{2})/);
+    if(iso) return iso[0];
+    var dmy = s.match(/\b(\d{1,2})[\/.](\d{1,2})[\/.](\d{4})\b/);
+    if(dmy) return dmy[3] + "-" + String(dmy[2]).padStart(2,"0") + "-" + String(dmy[1]).padStart(2,"0");
+    var m = s.match(/\b(\d{1,2})(?:st|nd|rd|th)?\s+([A-Za-z]{3,9})\.?,?\s*(\d{4})?/);
+    if(m){
+      var mi = MONTHS.findIndex(function(x){ return x.indexOf(m[2].toLowerCase().slice(0,3)) === 0; });
+      if(mi > -1) return (m[3] || guessYear(mi, +m[1])) + "-" + String(mi+1).padStart(2,"0") + "-" + String(m[1]).padStart(2,"0");
+    }
+    var m2 = s.match(/\b([A-Za-z]{3,9})\.?\s+(\d{1,2})(?:st|nd|rd|th)?,?\s*(\d{4})?/);
+    if(m2){
+      var mi2 = MONTHS.findIndex(function(x){ return x.indexOf(m2[1].toLowerCase().slice(0,3)) === 0; });
+      if(mi2 > -1) return (m2[3] || guessYear(mi2, +m2[2])) + "-" + String(mi2+1).padStart(2,"0") + "-" + String(m2[2]).padStart(2,"0");
+    }
+    return "";
+  }
+  function guessYear(monthIdx, day){
+    var now = new Date(), y = now.getFullYear();
+    var cand = new Date(y, monthIdx, day, 12);
+    if(cand < new Date(now.getFullYear(), now.getMonth(), now.getDate(), 12)) y += 1;
+    return y;
+  }
+  function findDate(text){
+    var near = text.match(/(?:deadline|closing date|closes?|apply by|applications? close|last date)[^\n]{0,60}/i);
+    if(near){ var d = normalizeDate(near[0]); if(d) return d; }
+    return normalizeDate(text) || "";
+  }
+
+  /* ---------- export ---------- */
+  var CSV_COLS = [
+    ["company","Company"],["role","Role"],["status","Stage"],["type","Type"],
+    ["deadline","Apply by"],["appliedOn","Applied on"],["location","Location"],
+    ["workMode","Work mode"],["salary","Pay"],["source","Found via"],
+    ["link","Link"],["contact","Contact"],["notes","Notes"]
+  ];
+  function buildCSV(){
+    var q = function(v){ return '"' + String(v == null ? "" : v).replace(/"/g,'""') + '"'; };
+    var head = CSV_COLS.map(function(c){ return q(c[1]); }).join(",");
+    var body = visible().map(function(it){
+      return CSV_COLS.map(function(c){
+        var v = it[c[0]];
+        if(c[0] === "status") v = (SMAP[v] || {label:v}).label;
+        return q(v);
+      }).join(",");
+    }).join("\n");
+    return head + "\n" + body;
+  }
+  $("#btn-csv").addEventListener("click", async function(){
+    if(!items.length){ toast("Nothing to export yet."); return; }
+    var csv = buildCSV();
+    if(downloadsNs){
+      try{
+        await downloadsNs.save({filename:"get-at-role-" + todayISO() + ".csv", data:csv});
+        toast("Saved to your device.");
+        return;
+      }catch(e){
+        if(e && e.code === "declined") return;
+      }
+    }
+    try{
+      await navigator.clipboard.writeText(csv);
+      toast("Copied as CSV — paste it into Sheets or Excel.");
+    }catch(e){
+      toast("Export unavailable in this view.");
+    }
+  });
+
+  /* ---------- boot ---------- */
+  var prefs = readLS(PREF_KEY, null);
+  if(prefs){
+    if(prefs.filter) filter = prefs.filter;
+    if(prefs.sortBy){ sortBy = prefs.sortBy; $("#sort").value = sortBy; }
+  }
+  bootLocals = readLS(CACHE_KEY, []) || [];
+  if(Array.isArray(bootLocals)) items = bootLocals.slice();
+  render();
+
+  async function cap(name){
+    try{ return (await window.claude?.use?.(name)) || null; }
+    catch(e){ return null; }
+  }
+
+  (async function(){
+    var db = await cap("db");
+    if(db){
+      mode = "db";
+      col = db.collection("applications");
+      col.onSnapshot(function(snap){
+        items = snap.docs.map(function(d){
+          var o = d.data() || {}; o.id = d.id; return o;
+        });
+        cacheItems();
+        render();
+        migrateLocals();
+      }, function(){
+        mode = "local";
+        items = (readLS(CACHE_KEY, []) || []);
+        render();
+      });
+    } else {
+      mode = "local";
+      render();
+    }
+  })();
+
+  (async function(){ sampleFn = await cap("sample"); })();
+  (async function(){ downloadsNs = await cap("downloads"); })();
+
+  async function migrateLocals(){
+    if(migrated) return;
+    migrated = true;
+    var pending = (bootLocals || []).filter(function(x){ return x && x._local; });
+    if(!pending.length) return;
+    for(var i = 0; i < pending.length; i++){
+      try{ await col.doc().set(stripId(pending[i])); }catch(e){}
+    }
+    toast("Synced " + pending.length + " offline " + (pending.length === 1 ? "entry" : "entries") + " to the cloud.");
+  }
+})();
+</script>

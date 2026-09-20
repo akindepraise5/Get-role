@@ -1,0 +1,17 @@
+{
+  "name": "getatrole-agent",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Searches job boards for fresh postings and scores them against your profile, then writes an import file for the Get@role tracker.",
+  "engines": { "node": ">=20.12" },
+  "scripts": {
+    "search": "node src/index.js",
+    "dry": "node src/index.js --no-llm",
+    "today": "node src/index.js --days 1",
+    "directory": "node src/directory.js",
+    "directory:quick": "node src/directory.js --quick",
+    "embed": "node src/embed.js",
+    "refresh": "node src/directory.js && node src/embed.js"
+  }
+}
