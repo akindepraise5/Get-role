@@ -185,7 +185,7 @@ That runs two scripts:
   board, and records what it finds — how many design roles are open, their actual titles,
   which of product / UI-UX / graphic they are, and which regions they sit in. It also
   requests each careers URL and records the HTTP status.
-- **`src/embed.js`** writes the result into `getatrole.html` between its markers. It has to
+- **`src/embed.js`** writes the result into `index.html` between its markers. It has to
   be embedded rather than fetched, because the published page's network is blocked by CSP.
 
 Then republish the page and open **Companies** in the toolbar.

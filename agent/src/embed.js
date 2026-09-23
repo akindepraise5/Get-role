@@ -4,14 +4,14 @@
 // (the published page's network is blocked by CSP — it cannot call anything).
 //
 //   node src/directory.js && node src/embed.js
-// then republish getatrole.html.
+// then republish index.html.
 
 import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const PAGE = resolve(ROOT, "..", "getatrole.html");
+const PAGE = resolve(ROOT, "..", "index.html");
 const START = "/*__DIRECTORY_START__*/";
 const END = "/*__DIRECTORY_END__*/";
 
