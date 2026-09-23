@@ -4,66 +4,88 @@
 <style>
 :root{
   color-scheme: light;
-  --bg:#ECEFF0; --surface:#FFFFFF; --surface-2:#F4F7F7; --surface-3:#E4EAEB;
-  --ink:#0D1618; --ink-2:#44575C; --ink-3:#7A8C91;
-  --line:#DAE2E3; --line-2:#C5D1D3;
-  --accent:#0E5A64; --accent-2:#0A444C; --on-accent:#F1FAFB; --accent-soft:#DCEDEF;
-  --danger:#AB2E23; --danger-soft:#F8E3E1;
-  --warn:#8A5A05; --warn-soft:#FAEEDB;
-  --shadow-1:0 1px 2px rgba(13,22,24,.05);
-  --shadow-2:0 2px 4px rgba(13,22,24,.06), 0 16px 32px -20px rgba(13,22,24,.35);
-  --r-s:8px; --r-m:12px; --r-l:16px;
+  --bg:#EAE7FB; --bg-tint-a:#D9D2FA; --bg-tint-b:#F5DCF2;
+  --surface:#FFFFFF; --surface-2:#F8F6FF; --surface-3:#EEEAFC;
+  --ink:#13101F; --ink-2:#5C5678; --ink-3:#8E88AC;
+  --line:#E8E3F8; --line-2:#D5CDF0;
+  --accent:#6A45F5; --accent-2:#5730E4; --on-accent:#FFFFFF; --accent-soft:#EBE5FE;
+  --magenta:#C931C0; --pinkish:#F26FB2;
+  --solid:#141024; --on-solid:#FFFFFF;
+  --danger:#D22A5B; --danger-soft:#FBE3EC;
+  --warn:#A86200; --warn-soft:#FCEFD9;
+  --shadow-1:0 1px 2px rgba(35,20,80,.05);
+  --shadow-2:0 2px 6px rgba(35,20,80,.07), 0 20px 44px -22px rgba(35,20,80,.32);
+  --glow:0 10px 30px -12px rgba(106,69,245,.45);
+  --r-s:10px; --r-m:14px; --r-l:20px;
+  --hero:linear-gradient(112deg,#6A45F5 0%,#9B34E0 32%,#D13CAE 63%,#F79BC8 100%);
 
-  --st-saved:#4F6369;      --st-saved-bg:#E2E9EA;
-  --st-applied:#31469E;    --st-applied-bg:#E2E7F8;
-  --st-replied:#0B6F8C;    --st-replied-bg:#DCEEF5;
-  --st-interview:#8A5A05;  --st-interview-bg:#FAEEDB;
-  --st-offer:#0F6D44;      --st-offer-bg:#DBF0E4;
-  --st-rejected:#9B3A3A;   --st-rejected-bg:#F6E1E1;
-  --st-ghosted:#6A7176;    --st-ghosted-bg:#E8EBEB;
+  --st-saved:#5E5880;      --st-saved-bg:#ECE9F8;
+  --st-applied:#4B3FE0;    --st-applied-bg:#E7E4FE;
+  --st-replied:#0C7A9E;    --st-replied-bg:#DEF1F9;
+  --st-interview:#A86200;  --st-interview-bg:#FCEFD9;
+  --st-offer:#0C8A5E;      --st-offer-bg:#D9F5EA;
+  --st-rejected:#D22A5B;   --st-rejected-bg:#FBE3EC;
+  --st-ghosted:#7D77A0;    --st-ghosted-bg:#EFEDF8;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     color-scheme: dark;
-    --bg:#0C1214; --surface:#141C1E; --surface-2:#1A2426; --surface-3:#212D30;
-    --ink:#E7EEEF; --ink-2:#9AAAAE; --ink-3:#75868A;
-    --line:#263235; --line-2:#334144;
-    --accent:#4CC2CE; --accent-2:#7FD9E2; --on-accent:#05252A; --accent-soft:#12333A;
-    --danger:#F08A80; --danger-soft:#3A1C19;
-    --warn:#E5B357; --warn-soft:#352810;
-    --shadow-1:0 1px 2px rgba(0,0,0,.4);
-    --shadow-2:0 2px 6px rgba(0,0,0,.45), 0 20px 40px -24px rgba(0,0,0,.8);
-    --st-saved:#A3B4B9;      --st-saved-bg:#1E2A2D;
-    --st-applied:#9AAAFF;    --st-applied-bg:#1B2143;
-    --st-replied:#5FC7E6;    --st-replied-bg:#0F2F3B;
-    --st-interview:#E8B65C;  --st-interview-bg:#332710;
-    --st-offer:#5AD290;      --st-offer-bg:#0E2E1F;
-    --st-rejected:#EE8E8E;   --st-rejected-bg:#341A1A;
-    --st-ghosted:#9BA5A9;    --st-ghosted-bg:#202829;
+    --bg:#0B0818; --bg-tint-a:#1B1140; --bg-tint-b:#2A1038;
+    --surface:#161129; --surface-2:#1D1736; --surface-3:#272046;
+    --ink:#F1EDFC; --ink-2:#A79FC9; --ink-3:#7C74A2;
+    --line:#2A2348; --line-2:#3B3260;
+    --accent:#A585FF; --accent-2:#C0A8FF; --on-accent:#17102E; --accent-soft:#261D49;
+    --magenta:#E668DC; --pinkish:#F79BC8;
+    --solid:#F0EBFF; --on-solid:#17122B;
+    --danger:#FF8FAE; --danger-soft:#3B1526;
+    --warn:#E9B65E; --warn-soft:#38270D;
+    --shadow-1:0 1px 2px rgba(0,0,0,.45);
+    --shadow-2:0 2px 8px rgba(0,0,0,.5), 0 24px 48px -26px rgba(0,0,0,.85);
+    --glow:0 10px 32px -14px rgba(165,133,255,.5);
+    --hero:linear-gradient(112deg,#5330D0 0%,#8A25C4 32%,#B92E92 63%,#D4699F 100%);
+
+    --st-saved:#ACA5CE;      --st-saved-bg:#221C3D;
+    --st-applied:#A99EFF;    --st-applied-bg:#241F52;
+    --st-replied:#63C8E8;    --st-replied-bg:#10303F;
+    --st-interview:#E9B65E;  --st-interview-bg:#38270D;
+    --st-offer:#54D6A0;      --st-offer-bg:#0D3327;
+    --st-rejected:#FF8FAE;   --st-rejected-bg:#3B1526;
+    --st-ghosted:#9E97BF;    --st-ghosted-bg:#231E3C;
   }
 }
 :root[data-theme="dark"]{
   color-scheme: dark;
-  --bg:#0C1214; --surface:#141C1E; --surface-2:#1A2426; --surface-3:#212D30;
-  --ink:#E7EEEF; --ink-2:#9AAAAE; --ink-3:#75868A;
-  --line:#263235; --line-2:#334144;
-  --accent:#4CC2CE; --accent-2:#7FD9E2; --on-accent:#05252A; --accent-soft:#12333A;
-  --danger:#F08A80; --danger-soft:#3A1C19;
-  --warn:#E5B357; --warn-soft:#352810;
-  --shadow-1:0 1px 2px rgba(0,0,0,.4);
-  --shadow-2:0 2px 6px rgba(0,0,0,.45), 0 20px 40px -24px rgba(0,0,0,.8);
-  --st-saved:#A3B4B9;      --st-saved-bg:#1E2A2D;
-  --st-applied:#9AAAFF;    --st-applied-bg:#1B2143;
-  --st-replied:#5FC7E6;    --st-replied-bg:#0F2F3B;
-  --st-interview:#E8B65C;  --st-interview-bg:#332710;
-  --st-offer:#5AD290;      --st-offer-bg:#0E2E1F;
-  --st-rejected:#EE8E8E;   --st-rejected-bg:#341A1A;
-  --st-ghosted:#9BA5A9;    --st-ghosted-bg:#202829;
+  --bg:#0B0818; --bg-tint-a:#1B1140; --bg-tint-b:#2A1038;
+  --surface:#161129; --surface-2:#1D1736; --surface-3:#272046;
+  --ink:#F1EDFC; --ink-2:#A79FC9; --ink-3:#7C74A2;
+  --line:#2A2348; --line-2:#3B3260;
+  --accent:#A585FF; --accent-2:#C0A8FF; --on-accent:#17102E; --accent-soft:#261D49;
+  --magenta:#E668DC; --pinkish:#F79BC8;
+  --solid:#F0EBFF; --on-solid:#17122B;
+  --danger:#FF8FAE; --danger-soft:#3B1526;
+  --warn:#E9B65E; --warn-soft:#38270D;
+  --shadow-1:0 1px 2px rgba(0,0,0,.45);
+  --shadow-2:0 2px 8px rgba(0,0,0,.5), 0 24px 48px -26px rgba(0,0,0,.85);
+  --glow:0 10px 32px -14px rgba(165,133,255,.5);
+  --hero:linear-gradient(112deg,#5330D0 0%,#8A25C4 32%,#B92E92 63%,#D4699F 100%);
+
+  --st-saved:#ACA5CE;      --st-saved-bg:#221C3D;
+  --st-applied:#A99EFF;    --st-applied-bg:#241F52;
+  --st-replied:#63C8E8;    --st-replied-bg:#10303F;
+  --st-interview:#E9B65E;  --st-interview-bg:#38270D;
+  --st-offer:#54D6A0;      --st-offer-bg:#0D3327;
+  --st-rejected:#FF8FAE;   --st-rejected-bg:#3B1526;
+  --st-ghosted:#9E97BF;    --st-ghosted-bg:#231E3C;
 }
 
 *{box-sizing:border-box}
 body{
-  background:var(--bg); color:var(--ink);
+  background:
+    radial-gradient(900px 520px at 12% -6%, var(--bg-tint-a), transparent 62%),
+    radial-gradient(760px 480px at 92% 4%, var(--bg-tint-b), transparent 58%),
+    var(--bg);
+  background-attachment: fixed;
+  color:var(--ink);
   font-family:"Public Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   font-size:15px; line-height:1.45; margin:0; -webkit-text-size-adjust:100%;
 }
@@ -74,50 +96,78 @@ button,input,select,textarea{font:inherit;color:inherit}
 
 .topbar{
   position:sticky; top:env(safe-area-inset-top, 0px); z-index:30;
-  background:var(--bg); border-bottom:1px solid var(--line);
+  background:color-mix(in srgb, var(--bg) 82%, transparent);
+  -webkit-backdrop-filter:saturate(180%) blur(14px);
+  backdrop-filter:saturate(180%) blur(14px);
+  border-bottom:1px solid color-mix(in srgb, var(--line) 70%, transparent);
 }
-.topbar-in{max-width:880px;margin:0 auto;padding-inline:16px;padding-block:10px;display:flex;align-items:center;gap:12px}
+.topbar-in{max-width:900px;margin:0 auto;padding-inline:16px;padding-block:10px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.top-actions{display:flex;align-items:center;gap:8px;flex:none}
+.empty-cta{display:flex;gap:9px;justify-content:center;flex-wrap:wrap}
+@media (max-width:560px){
+  .top-actions{width:100%;flex:1 1 100%}
+  .top-actions .btn{flex:1;text-align:center;padding-inline:10px}
+}
 .brand{display:flex;align-items:center;gap:10px;min-width:0;flex:1}
-.mark{flex:none;width:34px;height:34px;border-radius:10px;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:19px;line-height:1}
+.mark{flex:none;width:36px;height:36px;border-radius:12px;background:var(--hero);color:#fff;display:grid;place-items:center;font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:19px;line-height:1;box-shadow:var(--glow)}
 .brand h1{font-size:19px;line-height:1.1}
 .sub{margin:1px 0 0;font-size:11.5px;color:var(--ink-2);letter-spacing:.01em}
 
-.btn{border:1px solid var(--line-2);background:var(--surface);color:var(--ink);border-radius:999px;padding:8px 14px;font-size:13.5px;font-weight:600;cursor:pointer;white-space:nowrap;box-shadow:var(--shadow-1);transition:transform .12s ease,background .12s ease,border-color .12s ease}
-.btn:hover{border-color:var(--accent)}
+.btn{border:1px solid var(--line-2);background:var(--surface);color:var(--ink);border-radius:999px;padding:9px 16px;font-size:13.5px;font-weight:600;cursor:pointer;white-space:nowrap;box-shadow:var(--shadow-1);transition:transform .14s ease,background .14s ease,border-color .14s ease,box-shadow .14s ease}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
 .btn:active{transform:translateY(1px)}
-.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
-.btn.primary:hover{background:var(--accent-2);border-color:var(--accent-2)}
+.btn.primary{background:var(--solid);border-color:var(--solid);color:var(--on-solid);box-shadow:var(--shadow-1)}
+.btn.primary:hover{background:var(--accent);border-color:var(--accent);color:var(--on-accent);box-shadow:var(--glow)}
 .btn.ghost{background:transparent;box-shadow:none;border-color:var(--line-2);color:var(--ink-2);font-weight:500}
 .btn.ghost:hover{color:var(--ink)}
 .btn.danger{background:transparent;border-color:var(--danger);color:var(--danger);box-shadow:none}
 .btn[disabled]{opacity:.5;cursor:not-allowed;transform:none}
 
-.wrap{max-width:880px;margin:0 auto;padding-inline:16px;padding-block:14px 60px}
+.wrap{max-width:900px;margin:0 auto;padding-inline:16px;padding-block:16px 64px}
+
+/* gradient summary banner */
+.hero{position:relative;overflow:hidden;border-radius:var(--r-l);background:var(--hero);color:#fff;padding:18px 20px;margin-bottom:16px;box-shadow:var(--glow)}
+.hero::after{content:"";position:absolute;inset:auto -60px -120px auto;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.35),transparent 68%);pointer-events:none}
+.hero h2{font-size:17px;letter-spacing:-.01em;margin-bottom:3px;color:#fff}
+.hero p{margin:0;font-size:12.5px;color:rgba(255,255,255,.82);line-height:1.5;max-width:46ch}
+.hero-stats{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;position:relative;z-index:1}
+.hstat{flex:1 1 92px;min-width:0;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.22);border-radius:12px;padding:9px 11px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.hstat b{display:block;font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;font-size:20px;font-weight:500;line-height:1.1;color:#fff}
+.hstat span{display:block;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-top:3px}
+.hero-cta{margin-top:14px;position:relative;z-index:1;display:flex;gap:8px;flex-wrap:wrap}
+.hero-cta button{border:0;border-radius:999px;padding:9px 16px;font-size:13px;font-weight:600;cursor:pointer;background:#fff;color:#1A1230;box-shadow:0 6px 18px -8px rgba(0,0,0,.5)}
+.hero-cta button.ghost{background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.3);box-shadow:none}
+.hero-cta button:active{transform:translateY(1px)}
+@media (max-width:420px){ .hero{padding:16px} .hstat b{font-size:18px} }
+
+/* theme toggle */
+.iconbtn{flex:none;width:36px;height:36px;border-radius:12px;border:1px solid var(--line-2);background:var(--surface);color:var(--ink-2);cursor:pointer;display:grid;place-items:center;font-size:15px;line-height:1;box-shadow:var(--shadow-1)}
+.iconbtn:hover{color:var(--accent);border-color:var(--accent)}
 
 .notice{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--surface-2);border:1px dashed var(--line-2);border-radius:var(--r-m);padding:10px 12px;margin-bottom:12px;font-size:13px;color:var(--ink-2)}
 .notice[hidden]{display:none!important}
 
 .rail{display:flex;gap:7px;overflow-x:auto;padding-block:2px 12px;scrollbar-width:none}
 .rail::-webkit-scrollbar{display:none}
-.stage{flex:none;display:flex;align-items:center;gap:7px;cursor:pointer;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px 6px 9px;font-size:13px;font-weight:500;color:var(--ink-2);box-shadow:var(--shadow-1)}
+.stage{flex:none;display:flex;align-items:center;gap:7px;cursor:pointer;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 13px 7px 10px;font-size:13px;font-weight:500;color:var(--ink-2);box-shadow:var(--shadow-1);transition:border-color .14s ease,color .14s ease}
 .stage .dot{width:7px;height:7px;border-radius:50%;background:var(--sc,var(--ink-3));flex:none}
 .stage .n{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;font-size:12px;color:var(--ink-3)}
-.stage[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
-.stage[aria-pressed="true"] .n{color:var(--bg);opacity:.75}
+.stage[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent);box-shadow:var(--glow)}
+.stage[aria-pressed="true"] .n{color:var(--on-accent);opacity:.8}
 
 .toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
 .search{flex:1 1 180px;min-width:0}
-.search input{width:100%;border:1px solid var(--line);background:var(--surface);border-radius:var(--r-m);padding:9px 12px;font-size:14px;-webkit-appearance:none;appearance:none}
+.search input{width:100%;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:10px 16px;font-size:14px;-webkit-appearance:none;appearance:none;box-shadow:var(--shadow-1)}
 .search input::placeholder{color:var(--ink-3)}
-select.plain{border:1px solid var(--line);background:var(--surface);border-radius:var(--r-m);padding:9px 30px 9px 11px;font-size:13.5px;color:var(--ink-2);-webkit-appearance:none;appearance:none;cursor:pointer;background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%);background-position:calc(100% - 15px) 50%,calc(100% - 10px) 50%;background-size:5px 5px,5px 5px;background-repeat:no-repeat}
+select.plain{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:10px 32px 10px 14px;font-size:13.5px;color:var(--ink-2);-webkit-appearance:none;appearance:none;cursor:pointer;box-shadow:var(--shadow-1);background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%);background-position:calc(100% - 17px) 50%,calc(100% - 12px) 50%;background-size:5px 5px,5px 5px;background-repeat:no-repeat}
 
 .list{display:flex;flex-direction:column;gap:9px}
 @media (min-width:780px){ .list{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start} }
 
-.card{position:relative;display:flex;gap:11px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-m);padding:12px 12px 12px 15px;box-shadow:var(--shadow-1);overflow:hidden;cursor:pointer;transition:border-color .14s ease,transform .14s ease}
-.card:hover{border-color:var(--line-2)}
+.card{position:relative;display:flex;gap:11px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-l);padding:14px 14px 14px 17px;box-shadow:var(--shadow-1);overflow:hidden;cursor:pointer;transition:border-color .16s ease,transform .16s ease,box-shadow .16s ease}
+.card:hover{border-color:var(--line-2);box-shadow:var(--shadow-2);transform:translateY(-1px)}
 .card:active{transform:scale(.995)}
-.card::before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:var(--sc)}
+.card::before{content:"";position:absolute;inset:0 auto 0 0;width:5px;background:var(--sc);border-radius:0 4px 4px 0}
 .card-main{flex:1;min-width:0}
 .line1{display:flex;align-items:baseline;gap:8px;justify-content:space-between}
 .role{font-size:15.5px;line-height:1.25;overflow-wrap:anywhere}
@@ -139,8 +189,39 @@ select.plain{border:1px solid var(--line);background:var(--surface);border-radiu
 .empty h2{font-size:19px;margin-bottom:6px}
 .empty p{color:var(--ink-2);font-size:14px;margin:0 auto 16px;max-width:38ch}
 
-/* ---------- company directory ---------- */
-.co-tools{position:sticky;top:58px;background:var(--surface);z-index:1;padding-bottom:10px;margin-bottom:4px;border-bottom:1px solid var(--line)}
+/* ---------- directory: companies + boards ---------- */
+.tabs{display:flex;gap:3px;background:var(--surface-3);padding:3px;border-radius:999px;margin-bottom:14px}
+.tabs button{flex:1;border:0;background:transparent;border-radius:999px;padding:7px 12px;font-size:13px;font-weight:600;color:var(--ink-2);cursor:pointer}
+.tabs button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:var(--shadow-1)}
+.tabs button:hover{color:var(--ink)}
+
+.bd-actions{display:flex;gap:7px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+.bd-list{display:flex;flex-direction:column;gap:8px}
+.bd-star{flex:none;border:0;background:transparent;cursor:pointer;font-size:17px;line-height:1;padding:1px 3px;color:var(--ink-3);border-radius:6px}
+.bd-star:hover{color:var(--warn)}
+.bd-star[aria-pressed="true"]{color:var(--warn)}
+.bd-edit{flex:none;font-size:11px;font-weight:600;color:var(--ink-2);background:transparent;border:1px solid var(--line-2);border-radius:999px;padding:3px 9px;cursor:pointer}
+.bd-edit:hover{color:var(--ink);border-color:var(--accent)}
+.bd.mine{border-color:var(--accent-soft);background:var(--surface)}
+.chipset{display:flex;flex-wrap:wrap;gap:6px}
+.chipset button{border:1px solid var(--line-2);background:var(--surface-2);color:var(--ink-2);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:500;cursor:pointer}
+.chipset button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent);font-weight:600}
+
+.tip{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-top:20px;padding:11px 13px;border:1px dashed var(--line-2);border-radius:var(--r-m);background:var(--surface-2);font-size:12.5px;color:var(--ink-2);line-height:1.55}
+.tip[hidden]{display:none!important}
+.tip b{color:var(--ink);font-weight:600}
+.tip button{flex:none;border:0;background:transparent;color:var(--ink-3);font-size:12px;font-weight:600;cursor:pointer;padding:4px 8px;border-radius:6px}
+.tip button:hover{color:var(--ink)}
+
+.bd{border:1px solid var(--line);border-radius:var(--r-m);padding:11px 12px;background:var(--surface-2)}
+.bd-head{display:flex;gap:9px;align-items:baseline;justify-content:space-between}
+.bd-name{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:14.5px;letter-spacing:-.01em;color:var(--ink);text-decoration:none;line-height:1.25}
+.bd-name:hover{color:var(--accent);text-decoration:underline}
+.bd-go{flex:none;font-size:11px;font-weight:600;color:var(--accent);text-decoration:none;white-space:nowrap}
+.bd-note{font-size:12.5px;color:var(--ink-2);margin:5px 0 0;line-height:1.5}
+.bd-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+
+.co-tools{padding-bottom:10px;margin-bottom:4px;border-bottom:1px solid var(--line)}
 .co-rail{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-block:2px 8px}
 .co-rail::-webkit-scrollbar{display:none}
 .co-rail .stage{font-size:12.5px;padding:5px 11px}
@@ -218,7 +299,11 @@ a.link:hover{border-bottom-color:var(--accent)}
         <p class="sub" id="subline">Loading your pipeline…</p>
       </div>
     </div>
-    <button class="btn primary" id="btn-paste" type="button">Paste a job</button>
+    <div class="top-actions">
+      <button class="iconbtn" id="btn-theme" type="button" aria-label="Switch colour theme" title="Switch theme">◑</button>
+      <button class="btn" id="btn-companies" type="button">Where to look</button>
+      <button class="btn primary" id="btn-paste" type="button">Paste a job</button>
+    </div>
   </div>
 </header>
 
@@ -227,6 +312,36 @@ a.link:hover{border-bottom-color:var(--accent)}
     <span id="notice-text"></span>
     <button class="btn ghost" id="notice-action" type="button" hidden></button>
   </div>
+
+  <section class="hero" id="hero" hidden>
+
+
+    <h2 id="hero-title">Your pipeline</h2>
+
+
+    <p id="hero-line"></p>
+
+
+    <div class="hero-stats" id="hero-stats"></div>
+
+
+    <div class="hero-cta">
+
+
+      <button type="button" id="hero-paste">Paste a job</button>
+
+
+      <button type="button" class="ghost" id="hero-explore">Where to look</button>
+
+
+    </div>
+
+
+  </section>
+
+
+  
+
 
   <nav class="rail" id="rail" aria-label="Filter by stage"></nav>
 
@@ -238,17 +353,26 @@ a.link:hover{border-bottom-color:var(--accent)}
       <option value="company">Company A–Z</option>
       <option value="stage">Stage</option>
     </select>
-    <button class="btn ghost" id="btn-companies" type="button">Companies</button>
     <button class="btn ghost" id="btn-new" type="button">+ Blank</button>
     <button class="btn ghost" id="btn-csv" type="button">Export</button>
   </div>
 
   <div class="list" id="list"></div>
 
+  <div class="tip" id="tip" hidden>
+    <span><b>Keep this one tap away.</b> On your phone, open your browser menu and choose
+    <b>Add to Home Screen</b> — Get@role then opens like an app, full screen, with your
+    pipeline already loaded. On a laptop, bookmark it or pin it in your Claude sidebar.</span>
+    <button type="button" id="tip-dismiss">Got it</button>
+  </div>
+
   <div class="empty" id="empty" hidden>
     <h2>Nothing tracked yet</h2>
-    <p>Copy a job or internship posting — the whole thing, mess and all — and paste it in. The fields fill themselves.</p>
-    <button class="btn primary" id="btn-paste-2" type="button">Paste a job</button>
+    <p>No posting to hand? Start with <b>Where to look</b> — 99 companies hiring designers and 71 job boards, filtered by discipline and country. Found one? Paste it in, mess and all, and the fields fill themselves.</p>
+    <div class="empty-cta">
+      <button class="btn" id="btn-explore-2" type="button">Where to look</button>
+      <button class="btn primary" id="btn-paste-2" type="button">Paste a job</button>
+    </div>
   </div>
 </main>
 
@@ -276,19 +400,80 @@ a.link:hover{border-bottom-color:var(--accent)}
   <div class="panel" role="dialog" aria-modal="true" aria-labelledby="co-title">
     <div class="panel-head">
       <div>
-        <h2 id="co-title">Who hires designers</h2>
+        <h2 id="co-title">Where to look</h2>
         <p class="sub" id="co-sub"></p>
       </div>
       <button class="x" type="button" data-close aria-label="Close">×</button>
     </div>
-    <div class="co-tools">
-      <div class="search"><input id="co-q" type="search" placeholder="Search company, sector, city…" autocomplete="off"></div>
-      <div class="co-rail" id="co-rail-group" aria-label="Filter by region"></div>
-      <div class="co-rail" id="co-rail-disc" aria-label="Filter by design discipline"></div>
-      <div class="co-rail" id="co-rail-where" aria-label="Filter by where the roles are"></div>
+
+    <div class="tabs" id="co-tabs">
+      <button type="button" data-tab="companies" aria-pressed="true">Companies</button>
+      <button type="button" data-tab="boards" aria-pressed="false">Job boards</button>
     </div>
-    <div id="co-body"></div>
-    <p class="co-note" id="co-note"></p>
+
+    <div id="tab-companies">
+      <div class="co-tools">
+        <div class="search"><input id="co-q" type="search" placeholder="Search company, sector, city…" autocomplete="off"></div>
+        <div class="co-rail" id="co-rail-group" aria-label="Filter by region"></div>
+        <div class="co-rail" id="co-rail-disc" aria-label="Filter by design discipline"></div>
+        <div class="co-rail" id="co-rail-where" aria-label="Filter by where the roles are"></div>
+      </div>
+      <div id="co-body"></div>
+      <p class="co-note" id="co-note"></p>
+    </div>
+
+    <div id="tab-boards" hidden>
+      <div class="bd-actions">
+        <button class="btn primary" type="button" id="bd-add">+ Add a link</button>
+        <button class="btn ghost" type="button" id="bd-starred" aria-pressed="false">★ Starred only</button>
+      </div>
+      <div class="co-tools">
+        <div class="search"><input id="bd-q" type="search" placeholder="Search board, country, discipline…" autocomplete="off"></div>
+        <div class="co-rail" id="bd-rail-region" aria-label="Filter boards by region"></div>
+        <div class="co-rail" id="bd-rail-focus" aria-label="Filter boards by discipline"></div>
+      </div>
+      <div id="bd-body"></div>
+      <p class="co-note" id="bd-note"></p>
+    </div>
+  </div>
+</div>
+
+<!-- add / edit a link -->
+<div class="sheet" id="sheet-link" hidden>
+  <div class="panel" role="dialog" aria-modal="true" aria-labelledby="link-title">
+    <div class="panel-head">
+      <h2 id="link-title">Add a link</h2>
+      <button class="x" type="button" data-close aria-label="Close">×</button>
+    </div>
+    <form id="link-form" novalidate>
+      <div class="field">
+        <label for="l-name">Name</label>
+        <input id="l-name" type="text" autocomplete="off" placeholder="Jobberman">
+      </div>
+      <div class="field">
+        <label for="l-url">Link</label>
+        <input id="l-url" type="url" inputmode="url" autocomplete="off" placeholder="https://www.jobberman.com">
+      </div>
+      <div class="field">
+        <label>What you'd find there</label>
+        <div class="chipset" id="l-focus">
+          <button type="button" data-focus="uiux" aria-pressed="false">UI/UX</button>
+          <button type="button" data-focus="graphic" aria-pressed="false">Graphic</button>
+          <button type="button" data-focus="branding" aria-pressed="false">Branding</button>
+          <button type="button" data-focus="general" aria-pressed="false">General</button>
+        </div>
+      </div>
+      <div class="field">
+        <label for="l-note">Note</label>
+        <input id="l-note" type="text" autocomplete="off" placeholder="Nigeria's biggest board — check the design category">
+      </div>
+      <div class="actions">
+        <button class="btn danger" id="l-delete" type="button" hidden>Delete</button>
+        <span class="spacer"></span>
+        <button class="btn ghost" type="button" data-close>Cancel</button>
+        <button class="btn primary" id="l-save" type="submit">Save</button>
+      </div>
+    </form>
   </div>
 </div>
 
@@ -532,6 +717,41 @@ a.link:hover{border-bottom-color:var(--accent)}
     if(mode === "local") bits.push("on this device only");
     $("#subline").textContent = bits.join("  ·  ");
 
+
+    // Gradient banner — same numbers, read at a glance.
+
+    var interviews = items.filter(function(it){
+
+      return it.status === "interview" || it.status === "replied";
+
+    }).length;
+
+    var offers = items.filter(function(it){ return it.status === "offer"; }).length;
+
+    $("#hero").hidden = items.length === 0;
+
+    $("#hero-line").textContent = soon
+
+      ? (soon === 1 ? "One role closes within the week — get it sent." : soon + " roles close within the week — get them sent.")
+
+      : (waiting ? "Nothing closing this week. " + waiting + " still waiting on a reply." : "Nothing closing this week. Paste a posting to add the next one.");
+
+    $("#hero-stats").innerHTML = [
+
+      [counts.saved || 0, "To apply"],
+
+      [waiting, "Awaiting"],
+
+      [interviews, "In play"],
+
+      [offers, "Offers"]
+
+    ].map(function(s){
+
+      return '<div class="hstat"><b>' + s[0] + "</b><span>" + s[1] + "</span></div>";
+
+    }).join("");
+
     var rows = visible();
     emptyBox.hidden = items.length !== 0;
     list.hidden = items.length === 0;
@@ -600,18 +820,26 @@ a.link:hover{border-bottom-color:var(--accent)}
     $(id).hidden = false;
     document.body.style.overflow = "hidden";
   }
+  // Sheets stack — the link form opens on top of the board list. Closing one
+  // must not take the sheet underneath with it.
+  function anyOpen(){ return document.querySelector(".sheet:not([hidden])"); }
+  function closeSheet(el){
+    if(el) el.hidden = true;
+    if(!anyOpen()) document.body.style.overflow = "";
+  }
   function closeSheets(){
-    $("#sheet-paste").hidden = true;
-    $("#sheet-edit").hidden = true;
+    Array.prototype.forEach.call(document.querySelectorAll(".sheet"), function(s){ s.hidden = true; });
     document.body.style.overflow = "";
   }
   document.addEventListener("click", function(e){
     var c = e.target.closest("[data-close]");
-    if(c) { closeSheets(); return; }
-    if(e.target.classList.contains("sheet")) closeSheets();
+    if(c){ closeSheet(c.closest(".sheet")); return; }
+    if(e.target.classList.contains("sheet")) closeSheet(e.target);
   });
   document.addEventListener("keydown", function(e){
-    if(e.key === "Escape") closeSheets();
+    if(e.key !== "Escape") return;
+    var open = document.querySelectorAll(".sheet:not([hidden])");
+    if(open.length) closeSheet(open[open.length - 1]);
   });
 
   function fillSelect(el, values, withBlank){
@@ -717,7 +945,13 @@ a.link:hover{border-bottom-color:var(--accent)}
   $("#sort").addEventListener("change", function(e){ sortBy = e.target.value; savePrefs(); render(); });
   $("#btn-new").addEventListener("click", function(){ openEditor(null, null); });
   $("#btn-paste").addEventListener("click", openPaste);
+
+  $("#hero-paste").addEventListener("click", openPaste);
+
+  $("#hero-explore").addEventListener("click", function(){ $("#btn-companies").click(); });
   $("#btn-paste-2").addEventListener("click", openPaste);
+
+  $("#btn-explore-2").addEventListener("click", function(){ $("#btn-companies").click(); });
   $("#notice-action").addEventListener("click", async function(){
     if(this.dataset.act !== "clear-examples") return;
     var ex = items.filter(function(it){ return it.isExample; });
@@ -980,18 +1214,267 @@ a.link:hover{border-bottom-color:var(--accent)}
     "</article>";
   }
 
-  $("#btn-companies").addEventListener("click", function(){
-    if(!(DIRECTORY.companies || []).length){
-      toast("The company list has not been built yet — run the directory script.");
+  /* ---------- job boards ---------- */
+  var BOARDS = /*__BOARDS_START__*/{"verifiedAt":"2026-09-23T14:37:27.642Z","regions":["Design-specific — global","Remote-first","General — global","UK & Ireland","Germany","France","Netherlands","Spain & Portugal","Italy","Nordics","Poland & Central Europe","Switzerland & Austria","Belgium","Southeast Europe"],"boards":[{"name":"Dribbble Jobs","url":"https://dribbble.com/jobs","region":"Design-specific — global","focus":["uiux","graphic","branding"],"note":"The default for visual and brand work. Portfolio-led — your Dribbble profile is the application.","verdict":"ok"},{"name":"Behance JobList","url":"https://www.behance.net/joblist","region":"Design-specific — global","focus":["graphic","branding","uiux"],"note":"Adobe's board. Strongest for graphic, motion and brand roles.","verdict":"blocked"},{"name":"UX Jobs Board","url":"https://www.uxjobsboard.com","region":"Design-specific — global","focus":["uiux"],"note":"Pure UX/product design, curated, global with heavy remote listings.","verdict":"ok"},{"name":"Coroflot","url":"https://www.coroflot.com/design-jobs","region":"Design-specific — global","focus":["uiux","graphic","branding"],"note":"Long-running design board; strong in industrial and brand design.","verdict":"blocked"},{"name":"AIGA Design Jobs","url":"https://designjobs.aiga.org","region":"Design-specific — global","focus":["graphic","branding"],"note":"The US professional design association's board. Graphic and brand heavy.","verdict":"blocked"},{"name":"IxDA Job Board","url":"https://ixda.org/jobs/","region":"Design-specific — global","focus":["uiux"],"note":"Interaction Design Association. Interaction and research roles.","verdict":"ok"},{"name":"Awwwards Jobs","url":"https://www.awwwards.com/jobs/","region":"Design-specific — global","focus":["uiux","graphic"],"note":"Agency and studio work, digital/web design led.","verdict":"ok"},{"name":"Smashing Jobs","url":"https://jobs.smashingmagazine.com","region":"Design-specific — global","focus":["uiux"],"note":"Front-end and UX crossover; small but high quality.","verdict":"ok"},{"name":"Working Not Working","url":"https://workingnotworking.com","region":"Design-specific — global","focus":["graphic","branding","uiux"],"note":"Curated creative talent network — agencies and brand studios hire here.","verdict":"ok"},{"name":"Creativepool","url":"https://creativepool.com/jobs","region":"Design-specific — global","focus":["graphic","branding","uiux"],"note":"Creative industry network, UK-rooted but global listings.","verdict":"blocked"},{"name":"Krop","url":"https://www.krop.com","region":"Design-specific — global","focus":["graphic","uiux"],"note":"Creative and tech portfolio board.","verdict":"ok"},{"name":"The Design Kids","url":"https://thedesignkids.org/community/jobs","region":"Design-specific — global","focus":["graphic","branding","uiux"],"note":"Built for design students and graduates. Studio listings by city worldwide.","verdict":"ok"},{"name":"We Work Remotely — Design","url":"https://weworkremotely.com/categories/remote-design-jobs","region":"Remote-first","focus":["uiux","graphic"],"note":"One of the largest remote boards; design is a top-level category.","verdict":"ok"},{"name":"RemoteOK — Design","url":"https://remoteok.com/remote-design-jobs","region":"Remote-first","focus":["uiux","graphic"],"note":"Also read automatically by your search agent.","verdict":"ok"},{"name":"Remotive — Design","url":"https://remotive.com/remote-jobs/design","region":"Remote-first","focus":["uiux","graphic"],"note":"Also read automatically by your search agent.","verdict":"ok"},{"name":"Jobicy — Design","url":"https://jobicy.com/remote-jobs/design-multimedia","region":"Remote-first","focus":["uiux","graphic"],"note":"Also read automatically by your search agent.","verdict":"blocked"},{"name":"Himalayas — Design","url":"https://himalayas.app/jobs/design","region":"Remote-first","focus":["uiux","graphic"],"note":"Remote board with good filtering by timezone and country eligibility.","verdict":"blocked"},{"name":"JustRemote","url":"https://justremote.co/remote-design-jobs","region":"Remote-first","focus":["uiux","graphic"],"note":"Remote design listings; some behind a paid tier.","verdict":"ok"},{"name":"Working Nomads — Design","url":"https://www.workingnomads.com/jobs?category=design","region":"Remote-first","focus":["uiux","graphic"],"note":"Curated remote listings, daily digest by email.","verdict":"ok"},{"name":"Wellfound","url":"https://wellfound.com/jobs","region":"General — global","focus":["uiux","general"],"note":"Formerly AngelList Talent. Startup roles, salary and equity shown up front.","verdict":"ok"},{"name":"Y Combinator — Work at a Startup","url":"https://www.workatastartup.com","region":"General — global","focus":["uiux","general"],"note":"YC portfolio only. Small teams, early design hires.","verdict":"ok"},{"name":"Built In","url":"https://builtin.com/jobs/design","region":"General — global","focus":["uiux","graphic"],"note":"US tech-hub focused with a real design category.","verdict":"blocked"},{"name":"Otta / Welcome to the Jungle","url":"https://www.welcometothejungle.com/en/jobs","region":"General — global","focus":["uiux","general"],"note":"Otta merged into Welcome to the Jungle. Strong UK and France coverage, good matching.","verdict":"ok"},{"name":"LinkedIn Jobs","url":"https://www.linkedin.com/jobs/","region":"General — global","focus":["uiux","graphic","branding","general"],"note":"Largest volume anywhere. Set alerts for exact titles rather than browsing.","verdict":"ok"},{"name":"Glassdoor","url":"https://www.glassdoor.com/Job/index.htm","region":"General — global","focus":["general"],"note":"Listings plus salary and interview reports — useful before you apply.","verdict":"blocked"},{"name":"Design Jobs Board","url":"https://www.designjobsboard.com","region":"UK & Ireland","focus":["graphic","branding","uiux"],"note":"The UK design board. Studios, agencies and in-house teams.","verdict":"ok"},{"name":"The Dots","url":"https://the-dots.com/jobs","region":"UK & Ireland","focus":["graphic","branding","uiux"],"note":"UK creative network — portfolio profile doubles as your application.","verdict":"blocked"},{"name":"Design Week Jobs","url":"https://www.designweek.co.uk/jobs/","region":"UK & Ireland","focus":["graphic","branding"],"note":"Industry publication's board. Senior and studio-side brand roles.","verdict":"ok"},{"name":"Creative Boom Jobs","url":"https://www.creativeboom.com/jobs/","region":"UK & Ireland","focus":["graphic","branding"],"note":"UK creative industry listings, often smaller studios.","verdict":"ok"},{"name":"Reed","url":"https://www.reed.co.uk/jobs/design-jobs","region":"UK & Ireland","focus":["general","graphic"],"note":"Large UK generalist board with a design category.","verdict":"ok"},{"name":"Totaljobs","url":"https://www.totaljobs.com/jobs/design","region":"UK & Ireland","focus":["general","graphic"],"note":"UK generalist; good for in-house and agency roles outside London.","verdict":"blocked"},{"name":"IrishJobs","url":"https://www.irishjobs.ie","region":"UK & Ireland","focus":["general"],"note":"The main Irish board — Dublin has a large tech design market.","verdict":"blocked"},{"name":"If You Could Jobs","url":"https://www.ifyoucouldjobs.com/","region":"UK & Ireland","focus":["graphic","branding","uiux"],"note":"UK creative jobs board. Studios, brand agencies and cultural institutions.","verdict":"ok"},{"name":"Creative Lives in Progress","url":"https://creativelivesinprogress.com/opportunities","region":"UK & Ireland","focus":["graphic","branding","uiux"],"note":"Early-career creative opportunities — internships, placements and junior roles, UK-focused.","verdict":"ok"},{"name":"Dasauge","url":"https://dasauge.de/jobs/","region":"Germany","focus":["graphic","branding","uiux"],"note":"The German creative industry board. Agencies, studios, in-house. German-language.","verdict":"ok"},{"name":"StepStone","url":"https://www.stepstone.de","region":"Germany","focus":["general","uiux"],"note":"Germany's largest job board. German-language, huge volume.","verdict":"blocked"},{"name":"XING Jobs","url":"https://www.xing.com/jobs","region":"Germany","focus":["general","uiux"],"note":"The German-speaking professional network — LinkedIn's local equivalent.","verdict":"ok"},{"name":"Berlin Startup Jobs","url":"https://berlinstartupjobs.com/engineering/","region":"Germany","focus":["uiux","general"],"note":"Berlin startup scene, mostly English-speaking roles — good if you have no German.","verdict":"ok"},{"name":"German Tech Jobs","url":"https://germantechjobs.de","region":"Germany","focus":["uiux","general"],"note":"English-language tech roles in Germany, salary ranges shown.","verdict":"ok"},{"name":"Welcome to the Jungle France","url":"https://www.welcometothejungle.com/fr/jobs","region":"France","focus":["uiux","general"],"note":"The dominant French tech and creative board.","verdict":"ok"},{"name":"APEC","url":"https://www.apec.fr/candidat/recherche-emploi.html","region":"France","focus":["general"],"note":"France's board for cadres — professional and managerial roles. French-language.","verdict":"ok"},{"name":"France Travail","url":"https://candidat.francetravail.fr/offres/emploi","region":"France","focus":["general"],"note":"The national employment service, formerly Pôle emploi. French-language.","verdict":"ok"},{"name":"Creativeheads","url":"https://www.creativeheads.net","region":"Netherlands","focus":["graphic","branding","uiux"],"note":"The Dutch creative industry board. Agencies and design studios. Dutch-language.","verdict":"ok"},{"name":"Magnet.me","url":"https://magnet.me","region":"Netherlands","focus":["general","uiux"],"note":"Dutch graduate and early-career platform — strong for internships.","verdict":"ok"},{"name":"Nationale Vacaturebank","url":"https://www.nationalevacaturebank.nl","region":"Netherlands","focus":["general"],"note":"Large Dutch generalist board. Dutch-language.","verdict":"ok"},{"name":"Undutchables","url":"https://undutchables.nl/vacancies/","region":"Netherlands","focus":["general"],"note":"Recruiter for international, non-Dutch-speaking candidates in the Netherlands.","verdict":"ok"},{"name":"Domestika Jobs","url":"https://www.domestika.org/en/jobs","region":"Spain & Portugal","focus":["graphic","branding","uiux"],"note":"Spanish-founded creative community with a design-only board. Spain and Latin America.","verdict":"blocked"},{"name":"InfoJobs","url":"https://www.infojobs.net","region":"Spain & Portugal","focus":["general","graphic"],"note":"Spain's largest job board. Spanish-language.","verdict":"ok"},{"name":"Landing.jobs","url":"https://landing.jobs","region":"Spain & Portugal","focus":["uiux","general"],"note":"Portuguese-founded tech board covering Portugal, Spain and remote EU. English-language.","verdict":"ok"},{"name":"Net-Empregos","url":"https://www.net-empregos.com","region":"Spain & Portugal","focus":["general"],"note":"Portugal's main generalist board. Portuguese-language.","verdict":"ok"},{"name":"InfoJobs Italia","url":"https://www.infojobs.it","region":"Italy","focus":["general","graphic"],"note":"Large Italian generalist board. Italian-language.","verdict":"ok"},{"name":"Monster Italia","url":"https://www.monster.it","region":"Italy","focus":["general"],"note":"Italian arm of Monster; design roles under creative categories.","verdict":"blocked"},{"name":"Indeed Italia","url":"https://it.indeed.com","region":"Italy","focus":["general","graphic"],"note":"Highest listing volume in Italy; aggregates most other boards.","verdict":"blocked"},{"name":"The Hub","url":"https://thehub.io/jobs","region":"Nordics","focus":["uiux","general"],"note":"Nordic startup jobs — Denmark, Sweden, Norway, Finland. English-language.","verdict":"ok"},{"name":"Jobindex","url":"https://www.jobindex.dk","region":"Nordics","focus":["general"],"note":"Denmark's largest board. Danish-language.","verdict":"ok"},{"name":"Arbetsförmedlingen","url":"https://arbetsformedlingen.se/platsbanken/","region":"Nordics","focus":["general"],"note":"Sweden's national employment service job bank. Swedish-language.","verdict":"ok"},{"name":"Finn.no Jobb","url":"https://www.finn.no/job/fulltime/search.html","region":"Nordics","focus":["general"],"note":"Norway's dominant classifieds site — where most Norwegian jobs are posted. Norwegian-language.","verdict":"ok"},{"name":"Duunitori","url":"https://duunitori.fi","region":"Nordics","focus":["general"],"note":"Finland's largest job board. Finnish-language.","verdict":"blocked"},{"name":"No Fluff Jobs","url":"https://nofluffjobs.com","region":"Poland & Central Europe","focus":["uiux","general"],"note":"Salary always disclosed. Poland plus wider CEE. English-language.","verdict":"ok"},{"name":"JustJoin.IT","url":"https://justjoin.it","region":"Poland & Central Europe","focus":["uiux","general"],"note":"Polish tech board with a UX/UI category and open salary ranges.","verdict":"ok"},{"name":"Pracuj.pl","url":"https://www.pracuj.pl","region":"Poland & Central Europe","focus":["general","graphic"],"note":"Poland's largest generalist board. Polish-language.","verdict":"blocked"},{"name":"Jobs.cz","url":"https://www.jobs.cz","region":"Poland & Central Europe","focus":["general"],"note":"The main Czech board. Czech-language.","verdict":"ok"},{"name":"StartupJobs.cz","url":"https://www.startupjobs.cz","region":"Poland & Central Europe","focus":["uiux","general"],"note":"Czech and Slovak startup roles, often English-speaking.","verdict":"blocked"},{"name":"jobs.ch","url":"https://www.jobs.ch/en/","region":"Switzerland & Austria","focus":["general","uiux"],"note":"Switzerland's largest board, with an English interface.","verdict":"ok"},{"name":"jobup.ch","url":"https://www.jobup.ch","region":"Switzerland & Austria","focus":["general"],"note":"French-speaking Switzerland — Geneva and Lausanne.","verdict":"ok"},{"name":"karriere.at","url":"https://www.karriere.at","region":"Switzerland & Austria","focus":["general","uiux"],"note":"Austria's largest job board. German-language.","verdict":"ok"},{"name":"Jobat","url":"https://www.jobat.be","region":"Belgium","focus":["general"],"note":"Belgian board covering both Dutch and French-speaking regions.","verdict":"blocked"},{"name":"StepStone Belgium","url":"https://www.stepstone.be","region":"Belgium","focus":["general","uiux"],"note":"Belgian arm of StepStone, trilingual listings.","verdict":"ok"},{"name":"eJobs","url":"https://www.ejobs.ro","region":"Southeast Europe","focus":["general"],"note":"Romania's largest board. Romanian-language.","verdict":"blocked"},{"name":"Kariera.gr","url":"https://www.kariera.gr","region":"Southeast Europe","focus":["general"],"note":"Greece's main job board.","verdict":"blocked"},{"name":"MojPosao","url":"https://www.moj-posao.net","region":"Southeast Europe","focus":["general"],"note":"Croatia's main job board. Croatian-language.","verdict":"ok"}]}/*__BOARDS_END__*/;
+
+  var FOCUS = {uiux:"UI/UX", graphic:"Graphic", branding:"Branding", general:"General"};
+  var bdF = {region:"all", focus:"all", q:"", starredOnly:false};
+
+  // Your own links and your stars live in the database alongside your pipeline,
+  // so they follow you between phone and laptop. localStorage is the fallback
+  // when the database is unreachable.
+  var STAR_KEY = "getatrole.stars.v1", LINKS_KEY = "getatrole.links.v1";
+  var stars = [], myLinks = [], linksCol = null, starsDoc = null, linksMigrated = false;
+
+  function isStarred(url){ return stars.indexOf(url) > -1; }
+
+  async function toggleStar(url){
+    var i = stars.indexOf(url);
+    if(i > -1) stars.splice(i, 1); else stars.push(url);
+    writeLS(STAR_KEY, stars);
+    renderBoards();
+    if(starsDoc){
+      try{ await starsDoc.set({urls: stars.slice()}); }
+      catch(e){ toast("Starred here, but it could not sync."); }
+    }
+  }
+
+  function localLinkId(){ return "l-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2,6); }
+
+  async function saveLink(data, id){
+    if(linksCol){
+      await (id && String(id).slice(0,2) !== "l-" ? linksCol.doc(id) : linksCol.doc()).set(data);
       return;
     }
-    renderCompanies();
+    if(id){
+      var i = myLinks.map(function(x){ return x.id; }).indexOf(id);
+      if(i > -1) myLinks[i] = Object.assign({id:id, _local:true}, data);
+    } else {
+      myLinks.push(Object.assign({id:localLinkId(), _local:true}, data));
+    }
+    writeLS(LINKS_KEY, myLinks);
+    renderBoards();
+  }
+
+  async function deleteLink(id){
+    if(linksCol && String(id).slice(0,2) !== "l-"){ await linksCol.doc(id).delete(); return; }
+    myLinks = myLinks.filter(function(x){ return x.id !== id; });
+    writeLS(LINKS_KEY, myLinks);
+    renderBoards();
+  }
+
+  // Your links, shaped like a curated board so one renderer handles both.
+  function allBoards(){
+    var mine = myLinks.map(function(l){
+      return {name:l.name, url:l.url, region:"My links", focus:l.focus || [],
+              note:l.note || "", verdict:"ok", custom:true, id:l.id};
+    });
+    return mine.concat(BOARDS.boards || []);
+  }
+
+  function bdMatches(b){
+    if(bdF.region !== "all" && b.region !== bdF.region) return false;
+    if(bdF.focus !== "all" && (b.focus || []).indexOf(bdF.focus) < 0) return false;
+    var q = bdF.q.trim().toLowerCase();
+    if(q && [b.name, b.region, b.note, (b.focus||[]).map(function(f){return FOCUS[f];}).join(" ")]
+      .join(" ").toLowerCase().indexOf(q) < 0) return false;
+    return true;
+  }
+
+  function renderBoards(){
+    var all = allBoards();
+    var regions = (myLinks.length ? ["My links"] : []).concat(BOARDS.regions || []);
+
+    chips($("#bd-rail-region"), [{v:"all", label:"Everywhere", n:all.length}].concat(
+      regions.map(function(r){
+        return {v:r, label:r, n:all.filter(function(b){ return b.region === r; }).length};
+      }).filter(function(o){ return o.n > 0; })
+    ), "region");
+
+    chips($("#bd-rail-focus"), [{v:"all", label:"Any discipline"}].concat(
+      Object.keys(FOCUS).map(function(k){
+        return {v:k, label:FOCUS[k], n:all.filter(function(b){ return (b.focus||[]).indexOf(k) > -1; }).length};
+      })
+    ), "focus");
+
+    $("#bd-starred").setAttribute("aria-pressed", String(bdF.starredOnly));
+    $("#bd-starred").textContent = "★ Starred only" + (stars.length ? " (" + stars.length + ")" : "");
+
+    var rows = all.filter(bdMatches);
+    if(bdF.starredOnly) rows = rows.filter(function(b){ return isStarred(b.url); });
+
+    if(!rows.length){
+      $("#bd-body").innerHTML = '<p class="co-note">' +
+        (bdF.starredOnly
+          ? "Nothing starred yet. Tap the ☆ on any board to pin it to the top."
+          : "No board matches those filters.") + "</p>";
+    } else {
+      // Starred entries lift to the top instead of appearing twice.
+      var starred = bdF.starredOnly ? [] : rows.filter(function(b){ return isStarred(b.url); });
+      var rest = bdF.starredOnly ? rows : rows.filter(function(b){ return !isStarred(b.url); });
+
+      // Keep the curated region order rather than sorting alphabetically.
+      var order = {};
+      regions.forEach(function(r, i){ order[r] = i; });
+      rest.sort(function(a, b){
+        return ((order[a.region] || 0) - (order[b.region] || 0)) || a.name.localeCompare(b.name);
+      });
+
+      var groups = [];
+      if(starred.length) groups.push({region:"★ Starred", list:starred});
+      rest.forEach(function(b){
+        var g = groups[groups.length - 1];
+        if(!g || g.region !== b.region) groups.push({region:b.region, list:[b]});
+        else g.list.push(b);
+      });
+      $("#bd-body").innerHTML = groups.map(function(g){
+        return '<p class="co-count">' + esc(g.region) + " · " + g.list.length + "</p>" +
+               '<div class="bd-list">' + g.list.map(bdCard).join("") + "</div>";
+      }).join("");
+    }
+
+    var when = BOARDS.verifiedAt ? new Date(BOARDS.verifiedAt) : null;
+    $("#bd-note").innerHTML =
+      "Every link here was requested and answered before it shipped" +
+      (when && !isNaN(when) ? " on " + esc(when.toLocaleDateString(undefined,{day:"numeric",month:"short"})) : "") +
+      "; anything that 404’d or failed to resolve was dropped rather than listed. " +
+      "Boards marked <b>local language</b> in their note are worth using anyway — browser translation handles them, " +
+      "and they carry roles that never reach the English-language boards.";
+  }
+
+  function bdCard(b){
+    var tags = (b.focus || []).map(function(f){ return '<span class="tag">' + esc(FOCUS[f] || f) + "</span>"; });
+    if(b.verdict === "blocked") tags.push('<span class="tag">opens in browser only</span>');
+    if(b.custom) tags.push('<span class="tag ex">yours</span>');
+    var st = isStarred(b.url);
+    return '<article class="bd' + (b.custom ? " mine" : "") + '">' +
+      '<div class="bd-head">' +
+        '<button class="bd-star" type="button" data-star="' + esc(b.url) + '" aria-pressed="' + st + '"' +
+          ' aria-label="' + (st ? "Unstar " : "Star ") + esc(b.name) + '" title="' + (st ? "Remove star" : "Star this") + '">' +
+          (st ? "★" : "☆") + "</button>" +
+        '<a class="bd-name" href="' + esc(b.url) + '" target="_blank" rel="noopener noreferrer">' + esc(b.name) + "</a>" +
+        '<a class="bd-go" href="' + esc(b.url) + '" target="_blank" rel="noopener noreferrer">Open ↗</a>' +
+      "</div>" +
+      (b.note ? '<p class="bd-note">' + esc(b.note) + "</p>" : "") +
+      '<div class="bd-tags">' + tags.join("") +
+        (b.custom ? '<button class="bd-edit" type="button" data-editlink="' + esc(b.id) + '">Edit</button>' : "") +
+      "</div>" +
+    "</article>";
+  }
+
+  /* ---------- add / edit your own link ---------- */
+  var editingLink = null;
+
+  function openLinkSheet(link){
+    editingLink = link || null;
+    $("#link-title").textContent = link ? "Edit link" : "Add a link";
+    $("#l-name").value = link ? (link.name || "") : "";
+    $("#l-url").value = link ? (link.url || "") : "";
+    $("#l-note").value = link ? (link.note || "") : "";
+    var picked = link ? (link.focus || []) : [];
+    Array.prototype.forEach.call($("#l-focus").children, function(b){
+      b.setAttribute("aria-pressed", String(picked.indexOf(b.getAttribute("data-focus")) > -1));
+    });
+    $("#l-delete").hidden = !link;
+    openSheet("#sheet-link");
+    setTimeout(function(){ $("#l-name").focus(); }, 60);
+  }
+
+  $("#l-focus").addEventListener("click", function(e){
+    var b = e.target.closest("[data-focus]");
+    if(!b) return;
+    b.setAttribute("aria-pressed", String(b.getAttribute("aria-pressed") !== "true"));
+  });
+
+  $("#link-form").addEventListener("submit", async function(e){
+    e.preventDefault();
+    var name = $("#l-name").value.trim();
+    var url = $("#l-url").value.trim();
+    if(!name || !url){ toast("A name and a link are both needed."); return; }
+    if(!/^https?:\/\//i.test(url)) url = "https://" + url;
+
+    var focus = [];
+    Array.prototype.forEach.call($("#l-focus").children, function(b){
+      if(b.getAttribute("aria-pressed") === "true") focus.push(b.getAttribute("data-focus"));
+    });
+
+    var btn = $("#l-save"); btn.disabled = true;
+    try{
+      await saveLink({name:name, url:url, note:$("#l-note").value.trim(), focus:focus,
+                      updatedAt:new Date().toISOString()}, editingLink && editingLink.id);
+      closeSheet($("#sheet-link"));
+      toast(editingLink ? "Link updated." : "Link added.");
+      editingLink = null;
+    }catch(err){
+      toast("Could not save that link. Try again.");
+    }finally{ btn.disabled = false; }
+  });
+
+  $("#l-delete").addEventListener("click", async function(){
+    if(!editingLink) return;
+    if(!confirm("Delete " + (editingLink.name || "this link") + "?")) return;
+    try{
+      await deleteLink(editingLink.id);
+      closeSheet($("#sheet-link"));
+      editingLink = null;
+      toast("Link deleted.");
+    }catch(e){ toast("Could not delete that link."); }
+  });
+
+  $("#bd-add").addEventListener("click", function(){ openLinkSheet(null); });
+  $("#bd-starred").addEventListener("click", function(){
+    bdF.starredOnly = !bdF.starredOnly;
+    renderBoards();
+  });
+
+  function setTab(name){
+    $("#tab-companies").hidden = name !== "companies";
+    $("#tab-boards").hidden = name !== "boards";
+    Array.prototype.forEach.call($("#co-tabs").children, function(b){
+      b.setAttribute("aria-pressed", String(b.getAttribute("data-tab") === name));
+    });
+    if(name === "boards") renderBoards(); else renderCompanies();
+    writeLS(PREF_KEY, {filter:filter, sortBy:sortBy, tab:name});
+  }
+
+  $("#co-tabs").addEventListener("click", function(e){
+    var b = e.target.closest("[data-tab]");
+    if(b) setTab(b.getAttribute("data-tab"));
+  });
+
+  $("#bd-q").addEventListener("input", function(e){ bdF.q = e.target.value; renderBoards(); });
+
+  $("#tab-boards").addEventListener("click", function(e){
+    var star = e.target.closest("[data-star]");
+    if(star){ toggleStar(star.getAttribute("data-star")); return; }
+
+    var edit = e.target.closest("[data-editlink]");
+    if(edit){
+      var id = edit.getAttribute("data-editlink");
+      openLinkSheet(myLinks.filter(function(l){ return l.id === id; })[0]);
+      return;
+    }
+
+    var chip = e.target.closest("[data-k]");
+    if(!chip) return;
+    bdF[chip.getAttribute("data-k")] = chip.getAttribute("data-v");
+    renderBoards();
+  });
+
+  $("#btn-companies").addEventListener("click", function(){
+    var hasCo = (DIRECTORY.companies || []).length, hasBd = (BOARDS.boards || []).length;
+    if(!hasCo && !hasBd){
+      toast("Nothing built yet — run the directory and boards scripts.");
+      return;
+    }
+    var prefs = readLS(PREF_KEY, {}) || {};
+    setTab(hasCo && prefs.tab !== "boards" ? "companies" : "boards");
     openSheet("#sheet-co");
   });
 
   $("#co-q").addEventListener("input", function(e){ coF.q = e.target.value; renderCompanies(); });
 
-  $("#sheet-co").addEventListener("click", async function(e){
+  $("#tab-companies").addEventListener("click", async function(e){
     var chip = e.target.closest("[data-k]");
     if(chip){
       coF[chip.getAttribute("data-k")] = chip.getAttribute("data-v");
@@ -1156,6 +1639,64 @@ a.link:hover{border-bottom-color:var(--accent)}
     }
   });
 
+  /* ---------- theme ---------- */
+
+
+  var THEME_KEY = "getatrole.theme.v1";
+
+
+  function applyTheme(t){
+
+
+    if(t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+
+
+    else document.documentElement.removeAttribute("data-theme");
+
+
+  }
+
+
+  function currentTheme(){
+
+
+    var saved = readLS(THEME_KEY, null);
+
+
+    if(saved === "light" || saved === "dark") return saved;
+
+
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+
+
+  }
+
+
+  applyTheme(readLS(THEME_KEY, null));
+
+
+  $("#btn-theme").addEventListener("click", function(){
+
+
+    var next = currentTheme() === "dark" ? "light" : "dark";
+
+
+    applyTheme(next);
+
+
+    writeLS(THEME_KEY, next);
+
+
+    this.setAttribute("aria-label", next === "dark" ? "Switch to light theme" : "Switch to dark theme");
+
+
+    toast(next === "dark" ? "Dark theme on." : "Light theme on.");
+
+
+  });
+
+
+
   /* ---------- boot ---------- */
   var prefs = readLS(PREF_KEY, null);
   if(prefs){
@@ -1164,7 +1705,23 @@ a.link:hover{border-bottom-color:var(--accent)}
   }
   bootLocals = readLS(CACHE_KEY, []) || [];
   if(Array.isArray(bootLocals)) items = bootLocals.slice();
+
+  var cachedStars = readLS(STAR_KEY, []);
+  if(Array.isArray(cachedStars)) stars = cachedStars;
+  var cachedLinks = readLS(LINKS_KEY, []);
+  if(Array.isArray(cachedLinks)) myLinks = cachedLinks;
+  var bootLinks = myLinks.slice();
+
   render();
+
+  // The home-screen tip shows until it is dismissed, once per device.
+  try{
+    if(!readLS("getatrole.tip.v1", false)) $("#tip").hidden = false;
+  }catch(e){}
+  $("#tip-dismiss").addEventListener("click", function(){
+    $("#tip").hidden = true;
+    writeLS("getatrole.tip.v1", true);
+  });
 
   async function cap(name){
     try{ return (await window.claude?.use?.(name)) || null; }
@@ -1176,6 +1733,25 @@ a.link:hover{border-bottom-color:var(--accent)}
     if(db){
       mode = "db";
       col = db.collection("applications");
+
+      // Your links and stars sync the same way the pipeline does.
+      linksCol = db.collection("links");
+      starsDoc = db.doc("prefs/stars");
+
+      linksCol.onSnapshot(function(snap){
+        myLinks = snap.docs.map(function(d){ var o = d.data() || {}; o.id = d.id; return o; });
+        writeLS(LINKS_KEY, myLinks);
+        if(!$("#tab-boards").hidden) renderBoards();
+        migrateLinks();
+      }, function(){ linksCol = null; });
+
+      starsDoc.onSnapshot(function(snap){
+        var d = snap.data();
+        if(d && Array.isArray(d.urls)) stars = d.urls;
+        writeLS(STAR_KEY, stars);
+        if(!$("#tab-boards").hidden) renderBoards();
+      }, function(){ starsDoc = null; });
+
       col.onSnapshot(function(snap){
         items = snap.docs.map(function(d){
           var o = d.data() || {}; o.id = d.id; return o;
@@ -1196,6 +1772,22 @@ a.link:hover{border-bottom-color:var(--accent)}
 
   (async function(){ sampleFn = await cap("sample"); })();
   (async function(){ downloadsNs = await cap("downloads"); })();
+
+  // Links added while the database was unreachable get uploaded once it is back.
+  async function migrateLinks(){
+    if(linksMigrated || !linksCol) return;
+    linksMigrated = true;
+    var pending = bootLinks.filter(function(l){ return l && l._local; });
+    if(!pending.length) return;
+    for(var i = 0; i < pending.length; i++){
+      var l = pending[i];
+      try{
+        await linksCol.doc().set({name:l.name, url:l.url, note:l.note || "",
+                                  focus:l.focus || [], updatedAt:new Date().toISOString()});
+      }catch(e){}
+    }
+    toast("Synced " + pending.length + " offline link" + (pending.length === 1 ? "" : "s") + ".");
+  }
 
   async function migrateLocals(){
     if(migrated) return;

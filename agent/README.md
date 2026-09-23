@@ -133,6 +133,43 @@ African fintechs are in that group — Paystack, Flutterwave, Moniepoint and Kud
 
 Turn either on by setting `"enabled": true` in `search.config.json`.
 
+## Job boards
+
+The second tab of **Where to look** in the tracker: the boards worth checking by hand,
+filterable by discipline (UI/UX, Graphic, Branding, General) and by region.
+
+Two kinds are in there. **Design-specific and remote-first boards** — Dribbble, Behance,
+UX Jobs Board, Coroflot, AIGA, IxDA, Awwwards, Working Not Working, The Design Kids and the
+remote boards your agent already reads. And **native boards for eleven European markets** —
+Dasauge and StepStone for Germany, Welcome to the Jungle and APEC for France, Creativeheads
+and Magnet.me for the Netherlands, Domestika and InfoJobs for Spain, The Hub and Jobindex
+for the Nordics, No Fluff Jobs and JustJoin.IT for Poland, and so on.
+
+Several are local-language only. Use them anyway — browser translation handles them fine,
+and they carry roles that never reach the English-language boards.
+
+```bash
+npm run boards      # re-check every board URL
+```
+
+Edit [boards.json](boards.json) to add your own. Each board needs a `name`, `url`, `region`
+(one of the list at the top of the file) and `focus` — any of `uiux`, `graphic`, `branding`,
+`general`.
+
+### The three-verdict check
+
+`src/boards.js` requests each URL sequentially — a parallel burst trips bot protection and
+reports false failures — and records one of three verdicts:
+
+| Verdict | Meaning | What happens |
+|---|---|---|
+| `ok` | 2xx/3xx | Listed normally |
+| `blocked` | 401/403/429 | Bot protection answering. The site is live and opens fine in a real browser, so it is listed and tagged *opens in browser only* |
+| `dead` | 404, or the name never resolved | **Dropped at embed time.** Never shipped |
+
+That third row is why the list is shorter than the one I started with — a handful of boards
+that used to exist no longer do, and a link verified broken is worse than no link.
+
 ## The company directory
 
 A separate feature from the search: a browsable list of big tech, Fortune 500, UK, European

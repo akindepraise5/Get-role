@@ -1,0 +1,725 @@
+{
+  "_readme": "Curated job boards for design work. Every URL is checked by src/boards.js before it ships; anything that 404s or fails to resolve is dropped at embed time. `focus` drives the discipline filter: uiux, graphic, branding, general. `region` groups the list.",
+  "regions": [
+    "Design-specific — global",
+    "Remote-first",
+    "General — global",
+    "UK & Ireland",
+    "Germany",
+    "France",
+    "Netherlands",
+    "Spain & Portugal",
+    "Italy",
+    "Nordics",
+    "Poland & Central Europe",
+    "Switzerland & Austria",
+    "Belgium",
+    "Southeast Europe"
+  ],
+  "boards": [
+    {
+      "name": "Dribbble Jobs",
+      "url": "https://dribbble.com/jobs",
+      "region": "Design-specific — global",
+      "focus": [
+        "uiux",
+        "graphic",
+        "branding"
+      ],
+      "note": "The default for visual and brand work. Portfolio-led — your Dribbble profile is the application."
+    },
+    {
+      "name": "Behance JobList",
+      "url": "https://www.behance.net/joblist",
+      "region": "Design-specific — global",
+      "focus": [
+        "graphic",
+        "branding",
+        "uiux"
+      ],
+      "note": "Adobe's board. Strongest for graphic, motion and brand roles."
+    },
+    {
+      "name": "UX Jobs Board",
+      "url": "https://www.uxjobsboard.com",
+      "region": "Design-specific — global",
+      "focus": [
+        "uiux"
+      ],
+      "note": "Pure UX/product design, curated, global with heavy remote listings."
+    },
+    {
+      "name": "Coroflot",
+      "url": "https://www.coroflot.com/design-jobs",
+      "region": "Design-specific — global",
+      "focus": [
+        "uiux",
+        "graphic",
+        "branding"
+      ],
+      "note": "Long-running design board; strong in industrial and brand design."
+    },
+    {
+      "name": "AIGA Design Jobs",
+      "url": "https://designjobs.aiga.org",
+      "region": "Design-specific — global",
+      "focus": [
+        "graphic",
+        "branding"
+      ],
+      "note": "The US professional design association's board. Graphic and brand heavy."
+    },
+    {
+      "name": "IxDA Job Board",
+      "url": "https://ixda.org/jobs/",
+      "region": "Design-specific — global",
+      "focus": [
+        "uiux"
+      ],
+      "note": "Interaction Design Association. Interaction and research roles."
+    },
+    {
+      "name": "Awwwards Jobs",
+      "url": "https://www.awwwards.com/jobs/",
+      "region": "Design-specific — global",
+      "focus": [
+        "uiux",
+        "graphic"
+      ],
+      "note": "Agency and studio work, digital/web design led."
+    },
+    {
+      "name": "Smashing Jobs",
+      "url": "https://jobs.smashingmagazine.com",
+      "region": "Design-specific — global",
+      "focus": [
+        "uiux"
+      ],
+      "note": "Front-end and UX crossover; small but high quality."
+    },
+    {
+      "name": "Working Not Working",
+      "url": "https://workingnotworking.com",
+      "region": "Design-specific — global",
+      "focus": [
+        "graphic",
+        "branding",
+        "uiux"
+      ],
+      "note": "Curated creative talent network — agencies and brand studios hire here."
+    },
+    {
+      "name": "Creativepool",
+      "url": "https://creativepool.com/jobs",
+      "region": "Design-specific — global",
+      "focus": [
+        "graphic",
+        "branding",
+        "uiux"
+      ],
+      "note": "Creative industry network, UK-rooted but global listings."
+    },
+    {
+      "name": "Krop",
+      "url": "https://www.krop.com",
+      "region": "Design-specific — global",
+      "focus": [
+        "graphic",
+        "uiux"
+      ],
+      "note": "Creative and tech portfolio board."
+    },
+    {
+      "name": "The Design Kids",
+      "url": "https://thedesignkids.org/community/jobs",
+      "region": "Design-specific — global",
+      "focus": [
+        "graphic",
+        "branding",
+        "uiux"
+      ],
+      "note": "Built for design students and graduates. Studio listings by city worldwide."
+    },
+    {
+      "name": "We Work Remotely — Design",
+      "url": "https://weworkremotely.com/categories/remote-design-jobs",
+      "region": "Remote-first",
+      "focus": [
+        "uiux",
+        "graphic"
+      ],
+      "note": "One of the largest remote boards; design is a top-level category."
+    },
+    {
+      "name": "RemoteOK — Design",
+      "url": "https://remoteok.com/remote-design-jobs",
+      "region": "Remote-first",
+      "focus": [
+        "uiux",
+        "graphic"
+      ],
+      "note": "Also read automatically by your search agent."
+    },
+    {
+      "name": "Remotive — Design",
+      "url": "https://remotive.com/remote-jobs/design",
+      "region": "Remote-first",
+      "focus": [
+        "uiux",
+        "graphic"
+      ],
+      "note": "Also read automatically by your search agent."
+    },
+    {
+      "name": "Jobicy — Design",
+      "url": "https://jobicy.com/remote-jobs/design-multimedia",
+      "region": "Remote-first",
+      "focus": [
+        "uiux",
+        "graphic"
+      ],
+      "note": "Also read automatically by your search agent."
+    },
+    {
+      "name": "Himalayas — Design",
+      "url": "https://himalayas.app/jobs/design",
+      "region": "Remote-first",
+      "focus": [
+        "uiux",
+        "graphic"
+      ],
+      "note": "Remote board with good filtering by timezone and country eligibility."
+    },
+    {
+      "name": "JustRemote",
+      "url": "https://justremote.co/remote-design-jobs",
+      "region": "Remote-first",
+      "focus": [
+        "uiux",
+        "graphic"
+      ],
+      "note": "Remote design listings; some behind a paid tier."
+    },
+    {
+      "name": "Working Nomads — Design",
+      "url": "https://www.workingnomads.com/jobs?category=design",
+      "region": "Remote-first",
+      "focus": [
+        "uiux",
+        "graphic"
+      ],
+      "note": "Curated remote listings, daily digest by email."
+    },
+    {
+      "name": "Wellfound",
+      "url": "https://wellfound.com/jobs",
+      "region": "General — global",
+      "focus": [
+        "uiux",
+        "general"
+      ],
+      "note": "Formerly AngelList Talent. Startup roles, salary and equity shown up front."
+    },
+    {
+      "name": "Y Combinator — Work at a Startup",
+      "url": "https://www.workatastartup.com",
+      "region": "General — global",
+      "focus": [
+        "uiux",
+        "general"
+      ],
+      "note": "YC portfolio only. Small teams, early design hires."
+    },
+    {
+      "name": "Built In",
+      "url": "https://builtin.com/jobs/design",
+      "region": "General — global",
+      "focus": [
+        "uiux",
+        "graphic"
+      ],
+      "note": "US tech-hub focused with a real design category."
+    },
+    {
+      "name": "Otta / Welcome to the Jungle",
+      "url": "https://www.welcometothejungle.com/en/jobs",
+      "region": "General — global",
+      "focus": [
+        "uiux",
+        "general"
+      ],
+      "note": "Otta merged into Welcome to the Jungle. Strong UK and France coverage, good matching."
+    },
+    {
+      "name": "LinkedIn Jobs",
+      "url": "https://www.linkedin.com/jobs/",
+      "region": "General — global",
+      "focus": [
+        "uiux",
+        "graphic",
+        "branding",
+        "general"
+      ],
+      "note": "Largest volume anywhere. Set alerts for exact titles rather than browsing."
+    },
+    {
+      "name": "Glassdoor",
+      "url": "https://www.glassdoor.com/Job/index.htm",
+      "region": "General — global",
+      "focus": [
+        "general"
+      ],
+      "note": "Listings plus salary and interview reports — useful before you apply."
+    },
+    {
+      "name": "Design Jobs Board",
+      "url": "https://www.designjobsboard.com",
+      "region": "UK & Ireland",
+      "focus": [
+        "graphic",
+        "branding",
+        "uiux"
+      ],
+      "note": "The UK design board. Studios, agencies and in-house teams."
+    },
+    {
+      "name": "The Dots",
+      "url": "https://the-dots.com/jobs",
+      "region": "UK & Ireland",
+      "focus": [
+        "graphic",
+        "branding",
+        "uiux"
+      ],
+      "note": "UK creative network — portfolio profile doubles as your application."
+    },
+    {
+      "name": "Design Week Jobs",
+      "url": "https://www.designweek.co.uk/jobs/",
+      "region": "UK & Ireland",
+      "focus": [
+        "graphic",
+        "branding"
+      ],
+      "note": "Industry publication's board. Senior and studio-side brand roles."
+    },
+    {
+      "name": "Creative Boom Jobs",
+      "url": "https://www.creativeboom.com/jobs/",
+      "region": "UK & Ireland",
+      "focus": [
+        "graphic",
+        "branding"
+      ],
+      "note": "UK creative industry listings, often smaller studios."
+    },
+    {
+      "name": "Reed",
+      "url": "https://www.reed.co.uk/jobs/design-jobs",
+      "region": "UK & Ireland",
+      "focus": [
+        "general",
+        "graphic"
+      ],
+      "note": "Large UK generalist board with a design category."
+    },
+    {
+      "name": "Totaljobs",
+      "url": "https://www.totaljobs.com/jobs/design",
+      "region": "UK & Ireland",
+      "focus": [
+        "general",
+        "graphic"
+      ],
+      "note": "UK generalist; good for in-house and agency roles outside London."
+    },
+    {
+      "name": "IrishJobs",
+      "url": "https://www.irishjobs.ie",
+      "region": "UK & Ireland",
+      "focus": [
+        "general"
+      ],
+      "note": "The main Irish board — Dublin has a large tech design market."
+    },
+    {
+      "name": "If You Could Jobs",
+      "url": "https://www.ifyoucouldjobs.com/",
+      "region": "UK & Ireland",
+      "focus": [
+        "graphic",
+        "branding",
+        "uiux"
+      ],
+      "note": "UK creative jobs board. Studios, brand agencies and cultural institutions."
+    },
+    {
+      "name": "Creative Lives in Progress",
+      "url": "https://creativelivesinprogress.com/opportunities",
+      "region": "UK & Ireland",
+      "focus": [
+        "graphic",
+        "branding",
+        "uiux"
+      ],
+      "note": "Early-career creative opportunities — internships, placements and junior roles, UK-focused."
+    },
+    {
+      "name": "Dasauge",
+      "url": "https://dasauge.de/jobs/",
+      "region": "Germany",
+      "focus": [
+        "graphic",
+        "branding",
+        "uiux"
+      ],
+      "note": "The German creative industry board. Agencies, studios, in-house. German-language."
+    },
+    {
+      "name": "StepStone",
+      "url": "https://www.stepstone.de",
+      "region": "Germany",
+      "focus": [
+        "general",
+        "uiux"
+      ],
+      "note": "Germany's largest job board. German-language, huge volume."
+    },
+    {
+      "name": "XING Jobs",
+      "url": "https://www.xing.com/jobs",
+      "region": "Germany",
+      "focus": [
+        "general",
+        "uiux"
+      ],
+      "note": "The German-speaking professional network — LinkedIn's local equivalent."
+    },
+    {
+      "name": "Berlin Startup Jobs",
+      "url": "https://berlinstartupjobs.com/engineering/",
+      "region": "Germany",
+      "focus": [
+        "uiux",
+        "general"
+      ],
+      "note": "Berlin startup scene, mostly English-speaking roles — good if you have no German."
+    },
+    {
+      "name": "German Tech Jobs",
+      "url": "https://germantechjobs.de",
+      "region": "Germany",
+      "focus": [
+        "uiux",
+        "general"
+      ],
+      "note": "English-language tech roles in Germany, salary ranges shown."
+    },
+    {
+      "name": "Welcome to the Jungle France",
+      "url": "https://www.welcometothejungle.com/fr/jobs",
+      "region": "France",
+      "focus": [
+        "uiux",
+        "general"
+      ],
+      "note": "The dominant French tech and creative board."
+    },
+    {
+      "name": "APEC",
+      "url": "https://www.apec.fr/candidat/recherche-emploi.html",
+      "region": "France",
+      "focus": [
+        "general"
+      ],
+      "note": "France's board for cadres — professional and managerial roles. French-language."
+    },
+    {
+      "name": "France Travail",
+      "url": "https://candidat.francetravail.fr/offres/emploi",
+      "region": "France",
+      "focus": [
+        "general"
+      ],
+      "note": "The national employment service, formerly Pôle emploi. French-language."
+    },
+    {
+      "name": "Creativeheads",
+      "url": "https://www.creativeheads.net",
+      "region": "Netherlands",
+      "focus": [
+        "graphic",
+        "branding",
+        "uiux"
+      ],
+      "note": "The Dutch creative industry board. Agencies and design studios. Dutch-language."
+    },
+    {
+      "name": "Magnet.me",
+      "url": "https://magnet.me",
+      "region": "Netherlands",
+      "focus": [
+        "general",
+        "uiux"
+      ],
+      "note": "Dutch graduate and early-career platform — strong for internships."
+    },
+    {
+      "name": "Nationale Vacaturebank",
+      "url": "https://www.nationalevacaturebank.nl",
+      "region": "Netherlands",
+      "focus": [
+        "general"
+      ],
+      "note": "Large Dutch generalist board. Dutch-language."
+    },
+    {
+      "name": "Undutchables",
+      "url": "https://undutchables.nl/vacancies/",
+      "region": "Netherlands",
+      "focus": [
+        "general"
+      ],
+      "note": "Recruiter for international, non-Dutch-speaking candidates in the Netherlands."
+    },
+    {
+      "name": "Domestika Jobs",
+      "url": "https://www.domestika.org/en/jobs",
+      "region": "Spain & Portugal",
+      "focus": [
+        "graphic",
+        "branding",
+        "uiux"
+      ],
+      "note": "Spanish-founded creative community with a design-only board. Spain and Latin America."
+    },
+    {
+      "name": "InfoJobs",
+      "url": "https://www.infojobs.net",
+      "region": "Spain & Portugal",
+      "focus": [
+        "general",
+        "graphic"
+      ],
+      "note": "Spain's largest job board. Spanish-language."
+    },
+    {
+      "name": "Landing.jobs",
+      "url": "https://landing.jobs",
+      "region": "Spain & Portugal",
+      "focus": [
+        "uiux",
+        "general"
+      ],
+      "note": "Portuguese-founded tech board covering Portugal, Spain and remote EU. English-language."
+    },
+    {
+      "name": "Net-Empregos",
+      "url": "https://www.net-empregos.com",
+      "region": "Spain & Portugal",
+      "focus": [
+        "general"
+      ],
+      "note": "Portugal's main generalist board. Portuguese-language."
+    },
+    {
+      "name": "InfoJobs Italia",
+      "url": "https://www.infojobs.it",
+      "region": "Italy",
+      "focus": [
+        "general",
+        "graphic"
+      ],
+      "note": "Large Italian generalist board. Italian-language."
+    },
+    {
+      "name": "Monster Italia",
+      "url": "https://www.monster.it",
+      "region": "Italy",
+      "focus": [
+        "general"
+      ],
+      "note": "Italian arm of Monster; design roles under creative categories."
+    },
+    {
+      "name": "Indeed Italia",
+      "url": "https://it.indeed.com",
+      "region": "Italy",
+      "focus": [
+        "general",
+        "graphic"
+      ],
+      "note": "Highest listing volume in Italy; aggregates most other boards."
+    },
+    {
+      "name": "The Hub",
+      "url": "https://thehub.io/jobs",
+      "region": "Nordics",
+      "focus": [
+        "uiux",
+        "general"
+      ],
+      "note": "Nordic startup jobs — Denmark, Sweden, Norway, Finland. English-language."
+    },
+    {
+      "name": "Jobindex",
+      "url": "https://www.jobindex.dk",
+      "region": "Nordics",
+      "focus": [
+        "general"
+      ],
+      "note": "Denmark's largest board. Danish-language."
+    },
+    {
+      "name": "Arbetsförmedlingen",
+      "url": "https://arbetsformedlingen.se/platsbanken/",
+      "region": "Nordics",
+      "focus": [
+        "general"
+      ],
+      "note": "Sweden's national employment service job bank. Swedish-language."
+    },
+    {
+      "name": "Finn.no Jobb",
+      "url": "https://www.finn.no/job/fulltime/search.html",
+      "region": "Nordics",
+      "focus": [
+        "general"
+      ],
+      "note": "Norway's dominant classifieds site — where most Norwegian jobs are posted. Norwegian-language."
+    },
+    {
+      "name": "Duunitori",
+      "url": "https://duunitori.fi",
+      "region": "Nordics",
+      "focus": [
+        "general"
+      ],
+      "note": "Finland's largest job board. Finnish-language."
+    },
+    {
+      "name": "No Fluff Jobs",
+      "url": "https://nofluffjobs.com",
+      "region": "Poland & Central Europe",
+      "focus": [
+        "uiux",
+        "general"
+      ],
+      "note": "Salary always disclosed. Poland plus wider CEE. English-language."
+    },
+    {
+      "name": "JustJoin.IT",
+      "url": "https://justjoin.it",
+      "region": "Poland & Central Europe",
+      "focus": [
+        "uiux",
+        "general"
+      ],
+      "note": "Polish tech board with a UX/UI category and open salary ranges."
+    },
+    {
+      "name": "Pracuj.pl",
+      "url": "https://www.pracuj.pl",
+      "region": "Poland & Central Europe",
+      "focus": [
+        "general",
+        "graphic"
+      ],
+      "note": "Poland's largest generalist board. Polish-language."
+    },
+    {
+      "name": "Jobs.cz",
+      "url": "https://www.jobs.cz",
+      "region": "Poland & Central Europe",
+      "focus": [
+        "general"
+      ],
+      "note": "The main Czech board. Czech-language."
+    },
+    {
+      "name": "StartupJobs.cz",
+      "url": "https://www.startupjobs.cz",
+      "region": "Poland & Central Europe",
+      "focus": [
+        "uiux",
+        "general"
+      ],
+      "note": "Czech and Slovak startup roles, often English-speaking."
+    },
+    {
+      "name": "jobs.ch",
+      "url": "https://www.jobs.ch/en/",
+      "region": "Switzerland & Austria",
+      "focus": [
+        "general",
+        "uiux"
+      ],
+      "note": "Switzerland's largest board, with an English interface."
+    },
+    {
+      "name": "jobup.ch",
+      "url": "https://www.jobup.ch",
+      "region": "Switzerland & Austria",
+      "focus": [
+        "general"
+      ],
+      "note": "French-speaking Switzerland — Geneva and Lausanne."
+    },
+    {
+      "name": "karriere.at",
+      "url": "https://www.karriere.at",
+      "region": "Switzerland & Austria",
+      "focus": [
+        "general",
+        "uiux"
+      ],
+      "note": "Austria's largest job board. German-language."
+    },
+    {
+      "name": "Jobat",
+      "url": "https://www.jobat.be",
+      "region": "Belgium",
+      "focus": [
+        "general"
+      ],
+      "note": "Belgian board covering both Dutch and French-speaking regions."
+    },
+    {
+      "name": "StepStone Belgium",
+      "url": "https://www.stepstone.be",
+      "region": "Belgium",
+      "focus": [
+        "general",
+        "uiux"
+      ],
+      "note": "Belgian arm of StepStone, trilingual listings."
+    },
+    {
+      "name": "eJobs",
+      "url": "https://www.ejobs.ro",
+      "region": "Southeast Europe",
+      "focus": [
+        "general"
+      ],
+      "note": "Romania's largest board. Romanian-language."
+    },
+    {
+      "name": "Kariera.gr",
+      "url": "https://www.kariera.gr",
+      "region": "Southeast Europe",
+      "focus": [
+        "general"
+      ],
+      "note": "Greece's main job board."
+    },
+    {
+      "name": "MojPosao",
+      "url": "https://www.moj-posao.net",
+      "region": "Southeast Europe",
+      "focus": [
+        "general"
+      ],
+      "note": "Croatia's main job board. Croatian-language."
+    }
+  ]
+}

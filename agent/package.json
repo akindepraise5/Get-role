@@ -11,7 +11,8 @@
     "today": "node src/index.js --days 1",
     "directory": "node src/directory.js",
     "directory:quick": "node src/directory.js --quick",
+    "boards": "node src/boards.js",
     "embed": "node src/embed.js",
-    "refresh": "node src/directory.js && node src/embed.js"
+    "refresh": "node src/directory.js && node src/boards.js && node src/embed.js"
   }
 }
